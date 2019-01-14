@@ -3,20 +3,8 @@
     border: 1px solid black;
 }
 
+/* Si on met le logo en flotant, sa taille passe de 120 à 122 en largeur et de 120 à 126 en largeur */
 #logo{
     float: left;
 }
-
-
-#pub{
-    margin-left:20px;
-}
-
-#pub a img{
-    display:block;  
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
 
