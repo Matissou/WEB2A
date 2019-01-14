@@ -1,0 +1,22 @@
+/* Votre feuille de style */
+#menu, #logo, main, .encart, footer, #recherche, #titre{
+    border: 1px solid black;
+}
+
+#logo{
+    float: left;
+}
+
+
+#pub{
+    margin-left:20px;
+}
+
+#pub a img{
+    display:block;  
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+

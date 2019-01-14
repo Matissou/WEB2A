@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- saved from url=(0149)https://chamilo.grenoble-inp.fr/courses/ENSIMAG4MM1CAW/document/tp/1/Exercice-02.html?cidReq=ENSIMAG4MM1CAW&id_session=0&gidReq=0&gradebook=0&origin= -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title> TP 1, Exo 2 </title>
+
+</head>
+<body>
+<h1> Colloque «&nbsp;Applis web &nbsp;» du 17 au 18 octobre 2015 </h1>
+<!-- Compléter la suite -->
+ 
+<div>Pour vous inscrire, veuillez indiquer les informations suivantes:
+<form method="POST"> 
+      <ul>
+            <li>Nom <input type="text" name="nom" size="14"></li>
+            <li>Prénom <input type="text" name="nom" size="14"> </li>
+            <li>Adresse de Facturation <br>
+               <!-- Change texte avec 48 colonnes et 4 lignes -->
+               <textarea name="adresseFact" cols="48" rows="4">
+               </textarea>
+            </li>
+            <li>Date d'arrivée 
+               <!-- Selecteur unique, size étant la hauteur du selecteur. Si size=2 on voit deux par deux les dates-->
+               <select name="dateArr" size="1">
+                  <option value="17102015">17 / 10 / 2015 </option>
+                  <option value="18102015">18 / 10 / 2015 </option>
+               </select>
+               Date de départ
+               <select name="dateArr" size="1">
+                  <option value="17102015">17 / 10 / 2015 </option>
+                  <option value="18102015">18 / 10 / 2015 </option>
+               </select>
+            </li>
+            
+            <!-- Checkbox. name permet de récuperer la valeur du bouton check. value est la valeur technique ratachée. ex conferencier -> conférencier -->
+            <li>Votre statut 
+               <input type="radio" name="statut" value="conferencier">Conférencier
+               <input type="radio" name="statut" value="chercheur">Chercheur
+               <input type="radio" name="statut" value="industriel" checked>Industriel
+            </li>
+            <!-- Checkbox. name... value valeur rattachée-->
+            <li>Réservation souhaitée
+                  <input type="checkbox" name="reservS" value="dej17102015">Déjeuner du 17/10/2015
+                  <input type="checkbox" name="reservS" value="dej18102015">Déjeuner du 18/10/2015
+                  <input type="checkbox" name="reservS" value="din17102015">Diner du 17/10/2015
+                  <input type="checkbox" name="reservS" value="din18102015">Diner du 18/10/2015
+                  
+            </li>
+         </ul>
+         
+         <!-- Boutton submit. value est ce qu'il affiche sur la page -->
+         <input type="submit" name="subB" value="Submit">
+</form>
+</div>
+
+</body></html>
