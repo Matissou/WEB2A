@@ -1,0 +1,21 @@
+# OS
+Thumbs.db
+.DS_Store
+
+# Build
+out
+build
+bin
+
+# Compressed
+*.zip 
+*.rar
+*.tar
+*.tar.gz
+
+# Other
+*.log
+*.swp
+*.bak
+*.jar
+*.pdf
