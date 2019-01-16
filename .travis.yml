@@ -1,0 +1,7 @@
+language: java
+install:
+  - wget https://github.com/validator/validator/releases/download/18.11.5/vnu.jar_18.11.5.zip
+  - unzip -j vnu.jar_18.11.5.zip dist/vnu.jar
+
+script: 
+  - java -jar vnu.jar $(find . -name "*.html")
