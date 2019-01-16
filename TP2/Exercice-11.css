@@ -1,10 +1,64 @@
 /* Votre feuille de style */
-#menu, #logo, main, .encart, footer, #recherche, #titre{
-    border: 1px solid black;
+#menu, #logo, main, .encart, footer, #recherche, #titre, #pub, .contenu{
+    border: 1px solid red;
+}
+
+header{
+    display:flex;
+    overflow:auto;
 }
 
 /* Si on met le logo en flotant, sa taille passe de 120 à 122 en largeur et de 120 à 126 en largeur */
-#logo{
-    float: left;
+#pub{ 
+    margin-left:20px;
+    flex-grow:1;
+    text-align: center;
+    padding-top:10px;
+}
+
+main #menu{
+    float:left;
+    width:10em;
+}
+
+#titre{
+    margin-left: 10em;
+    text-align: center;
+}
+
+.contenu{
+    margin-left:10em;
+    margin-bottom: 10em; 
+    padding-left: 10px;      
+    padding-bottom:100px;
+}
+
+.encart{
+    display:inline-block;
+    margin-top:4ex;
+    
+}
+
+#encart1{
+    width:10em;
+    float:right;
+    clear:both;
+}
+
+#encart2{
+    width:10em;
+    float:right;
+    clear:both;
+}
+
+#recherche{
+    position: absolute;
+    top: 19ex;
+    right: 2ex; 
+   margin:auto;
+}
+
+footer{
+    text-align: center;
 }
 
