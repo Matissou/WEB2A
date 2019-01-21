@@ -1,0 +1,64 @@
+#menu, #contents, #introduction{
+    border: 1px solid #930;
+}
+
+#menu, #introduction {
+    background-color: #fa0;
+}
+
+#menu li {
+    color:  #930;
+    float: left; 
+}
+
+#menu ul{
+    list-style-type: square;
+}
+
+#menu li a{
+    text-decoration: none;
+    color:  #930;
+}
+
+#introduction{
+    font-variant: small-caps;
+    width: fit-content;
+    margin: auto;
+    padding: 20px;
+}
+
+.introduction p{
+    font-style: italic;
+}
+
+#contents{
+    counter-reset: titre2;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.section:last-of-type{
+    border-top: 2px solid gold; 
+}
+
+h2{
+    margin-left: 20px;
+    text-decoration: underline;
+}
+
+h2::before{
+    counter-increment: titre2;
+    content: counter(titre2) ". ";
+}
+
+#conclusion{
+    background-color: #930;
+    color: #fff;
+    float: right;
+}
+
+#conclusion p{
+    margin: auto; 
+}
