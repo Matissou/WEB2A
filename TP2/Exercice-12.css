@@ -1,0 +1,64 @@
+/* Votre feuille de style ici */
+
+.csschange{
+    float:right;
+}
+
+h1, h2{
+    color:#66f;
+    font-style:italic;
+}
+
+#introduction{
+    padding-top: 20px;
+    text-align: center;
+    font-style:normal;
+}
+
+p{
+    color:black;
+    text-indent: 25px;
+    text-align: justify;
+}
+
+
+p::first-letter{
+    font-size:130%;
+    font-style:bold;
+}
+
+#contents{
+  /*  padding: 0px 10px 0px 10px;
+    margin : 0px 500px 0px 500px;   
+    */
+    margin:25%;
+    margin-top:0px;
+    margin-bottom:0px;
+
+    padding:0px 10px 0px 10px;
+
+    background-color: white;
+    border:1px solid black;
+    padding-bottom:500px;
+}
+
+body{
+    background-color: #ccc;
+    
+}
+
+.conclusion{
+    border-top: 1px solid grey;
+}
+
+.conclusion p::first-letter{
+    font-style: initial;
+}
+
+.conclusion p{
+    text-align: right;
+}
+
+#menu{
+    visibility: hidden;
+}
