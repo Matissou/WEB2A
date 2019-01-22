@@ -1,30 +1,76 @@
-ul li {
-    background-color: #777;
-    counter-increment: ul;
+ul{
+    counter-reset:menuH;
 }
 
-
-
-ul li a{
+ul li {
+    background-color: #777;
     color:white;
 }
 
-#menu{
-    background-color:blue;
+ul li::before{
+    counter-increment: menuH;
+    content: counter(menuH) " - ";
 }
 
-#menu:hover{
-    display:block;
+#menu ul{
+    border-top:20px solid blue;         
 }
 
-#menu{
-    position: absolute;
+#menu ul>li{
+    display: none;
+}
+
+#menu ul:hover > li {
+    display: block;
+}
+
+
+#menu ul li{
+    list-style-type: none;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    text-indent: 15px;
+}
+
+#menu ul li a {
+    color:white;
 }
 
 #menu ul li:hover > a
 {
-    display: block;
+    
     background-color: #f6f6f6;
     color: black;
 }
 
+body{
+    margin:0;
+}
+
+#contents{
+    counter-reset: titre;
+}
+
+.section{
+    border-top: 1px solid black; 
+}
+
+h1{
+    counter-increment: titre;
+    /*content: counter(titre) " - ";*/
+}
+
+h2::before{
+    counter-increment: titre;
+    content: counter(titre) " - ";
+}
+
+h2{
+    text-align: center;
+}
+
+.conclusion{
+    text-align: right;
+    background-color: black;
+    color: #eee;
+}
