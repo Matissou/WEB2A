@@ -1,6 +1,6 @@
 ul li {
     background-color: #777;
-    counter-increment: li;
+    counter-increment: ul;
 }
 
 
@@ -11,5 +11,20 @@ ul li a{
 
 #menu{
     background-color:blue;
-
 }
+
+#menu:hover{
+    display:block;
+}
+
+#menu{
+    position: absolute;
+}
+
+#menu ul li:hover > a
+{
+    display: block;
+    background-color: #f6f6f6;
+    color: black;
+}
+
