@@ -13,3 +13,35 @@ ul li a{
     background-color:blue;
 
 }
+
+body{
+    margin:0;
+}
+
+#contents{
+    counter-reset: titre;
+}
+
+.section{
+    border-top: 1px solid black; 
+}
+
+h1{
+    counter-increment: titre;
+    /*content: counter(titre) " - ";*/
+}
+
+h2::before{
+    counter-increment: titre;
+    content: counter(titre) " - ";
+}
+
+h2{
+    text-align: center;
+}
+
+.conclusion{
+    text-align: right;
+    background-color: black;
+    color: #eee;
+}
