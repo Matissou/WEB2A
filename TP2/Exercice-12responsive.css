@@ -1,0 +1,168 @@
+#menu, #contents, #introduction{
+    border: 1px solid #930;
+}
+
+#menu, #introduction {
+    background-color: #fa0;
+}
+
+#menu li {
+    color:  #930;
+    display: inline-block;
+    font-weight: bold;
+    padding-right: 15px; 
+}
+
+#menu li::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #930;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#menu ul{
+    margin: 5px;
+    padding: 0;
+}
+
+#menu li a{
+    text-decoration: none;
+    color:  #930;
+}
+
+#introduction{
+    font-variant: small-caps;
+    width: fit-content;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    margin-top: 0;
+    float: left;
+    padding: 20px;
+}
+
+.introduction p{
+    font-style: italic;
+}
+
+.section{
+    clear: both;
+}
+
+#contents{
+    counter-reset: titre2;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.section:last-of-type{
+    border-top: 2px solid gold; 
+}
+
+h2{
+    margin-left: 20px;
+    text-decoration: underline;
+}
+
+h2::before{
+    counter-increment: titre2;
+    content: counter(titre2) ". ";
+}
+
+#conclusion{
+    background-color: #930;
+    color: #fff;
+    float: right;
+}
+
+#conclusion p{
+    margin: auto; 
+}
+
+
+
+/* Pour les écran de taille inférieure a 1000px présentation 3 */
+@media screen and (max-width: 1000px) {
+    #menu ul li {
+        background-color: #777;
+        color:#eee;
+        margin-top: 1px;
+        padding: 5px;
+        border-radius: 3px;
+        text-align: center;
+    }
+    
+    #menu ul li a{
+        text-decoration: none;
+        color:#eee;
+    }
+    
+    #menu ul li::before{
+        counter-increment: menuH;
+        content: counter(menuH) " - ";
+    }
+    
+    #menu::before{
+        padding: 3px;
+        display: block;
+        content: "\2630";
+        background-color: #02b;
+        color: white;
+    }
+    
+    #menu ul{ 
+        display: none;
+        position: absolute;
+        width: 100%;
+        margin: 0;
+        padding: 0;  
+        counter-reset:menuH; 
+        list-style-type: none; 
+    }
+    
+    #menu:hover > ul{
+        display: block;
+    }
+    
+    #menu ul li:hover
+    {    
+        background-color: #f6f6f6;
+        color: black;
+    }
+    
+    body{
+        margin:0;
+    }
+    
+    #contents{
+        counter-reset: titre;
+    }
+    
+    .section{
+        border-top: 1px solid black; 
+    }
+    
+    h1{
+        counter-increment: titre;
+        /*content: counter(titre) " - ";*/
+    }
+    
+    h2::before{
+        counter-increment: titre;
+        content: counter(titre) " - ";
+    }
+    
+    h2{
+        text-align: center;
+    }
+    
+    .conclusion{
+        text-align: right;
+        background-color: black;
+        color: #eee;
+    }
+    
+}

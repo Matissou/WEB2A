@@ -3,13 +3,14 @@
 <head>
 	<title>Web Applications</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<link rel="StyleSheet" href="Exercice-12v3.css" type="text/css">
+	<link rel="StyleSheet" href="Exercice-12.css" type="text/css">
 
 	<script type="text/javascript">
-		function changeCSS(cssFile, cssLinkIndex) {
+		function changeCSS() {
+			var cssFile = document.getElementById("mySelect").value;
 
-			var oldlink = document.getElementsByTagName("link").item(cssLinkIndex);
-
+			var oldlink = document.getElementsByTagName("link").item(0);
+			
 			var newlink = document.createElement("link");
 			newlink.setAttribute("rel", "stylesheet");
 			newlink.setAttribute("type", "text/css");
@@ -23,7 +24,14 @@
 
 </head>
 <body>
-	<ul>
+	CSS à appliquer : 
+	<select id="mySelect" onchange="changeCSS()">
+		<option value="Exercice-12.css">V1
+		<option value="Exercice-12v2.css">V2
+		<option value="Exercice-12v3.css">V3
+		<option value="Exercice-12responsive.css">Responsive
+	</select>
+	<!-- <ul>
 		<li>		
 			<a class="csschange" href="#" onclick="changeCSS('Exercice-12.css', 0);">V1</a> 
 		</li>
@@ -33,7 +41,7 @@
 		<li>
 	        <a class="csschange" href="#" onclick="changeCSS('Exercice-12v3.css', 0);">V3</a>
 		</li>
-	</ul>
+	</ul> -->
 <div id="menu">
 	<ul>
 		<li><a href="#introduction">Introduction</a></li>
