@@ -1,44 +1,46 @@
-ul{
-    counter-reset:menuH;
-}
-
-ul li {
+#menu ul li {
     background-color: #777;
-    color:white;
+    color:#eee;
+    margin-top: 1px;
+    padding: 5px;
+    border-radius: 3px;
+    text-align: center;
 }
 
-ul li::before{
+#menu ul li a{
+    text-decoration: none;
+    color:#eee;
+}
+
+#menu ul li::before{
     counter-increment: menuH;
     content: counter(menuH) " - ";
 }
 
-#menu ul{
-    border-top:20px solid blue;         
+#menu::before{
+    padding: 3px;
+    display: block;
+    content: "\2630";
+    background-color: #02b;
+    color: white;
 }
 
-#menu ul>li{
+#menu ul{ 
     display: none;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    padding: 0;  
+    counter-reset:menuH; 
+    list-style-type: none; 
 }
 
-#menu ul:hover > li {
+#menu:hover > ul{
     display: block;
 }
 
-
-#menu ul li{
-    list-style-type: none;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    text-indent: 15px;
-}
-
-#menu ul li a {
-    color:white;
-}
-
-#menu ul li:hover > a
-{
-    
+#menu ul li:hover
+{    
     background-color: #f6f6f6;
     color: black;
 }
