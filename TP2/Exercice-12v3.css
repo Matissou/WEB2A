@@ -1,7 +1,15 @@
-#menu:hover{
-    visibility: hidden;
+ul li {
+    background-color: #777;
+    counter-increment: li;
 }
 
-p{
-    
+
+
+ul li a{
+    color:white;
+}
+
+#menu{
+    background-color:blue;
+
 }
