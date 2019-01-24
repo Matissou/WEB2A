@@ -47,6 +47,13 @@
     padding: 20px;
 }
 
+#introduction::after {
+    display: block;
+    font-size: 0.4em;
+    font-variant: normal;
+    content: "From Wikipedia, the free encyclopedia";
+}
+
 .introduction p{
     font-style: italic;
 }
