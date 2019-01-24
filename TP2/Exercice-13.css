@@ -1,1 +1,63 @@
 /* Votre feuille de style ici */
+
+li { color: green; }
+li:nth-child(odd) { color: red; }
+body {
+    background-color: lightblue;
+  } 
+
+
+#menu ul li{
+    border: 1px solid black;
+}
+
+#menu ul li:nth-child(odd){
+    border: 1px solid red;
+}
+
+h1 {
+    animation-duration: 3s;
+    animation-name: slidein;
+  }
+  
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%; 
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+
+
+img {
+/*    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    margin:-60px 0 0 -60px;
+  */
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+
+
+*{
+    
+    animation: bounce 0.7s ease infinite;
+}
+
+@keyframes bounce{
+    from {top: 106px;}
+    50%  {top: 86px;}
+    to   {top: 106px;}
+}
