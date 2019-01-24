@@ -13,6 +13,10 @@
     padding-right: 15px; 
 }
 
+#menu li:hover {
+    text-decoration: underline;
+}
+
 #menu li::before {
     content: "";
     width: 10px;
@@ -86,8 +90,18 @@ h2::before{
 
 /* Pour les écran de taille inférieure a 1000px présentation 3 */
 @media screen and (max-width: 1000px) {
+    h2{
+        text-decoration: none;
+    }
+    
+    #menu, #contents, #introduction{
+        border: none;
+        background-color: #fff;
+    }
+
     #menu ul li {
         background-color: #777;
+        display: block;
         color:#eee;
         margin-top: 1px;
         padding: 5px;
@@ -98,8 +112,15 @@ h2::before{
     #menu ul li a{
         text-decoration: none;
         color:#eee;
+        font-weight: normal;
     }
-    
+
+    #menu li::before{
+        width: auto;
+        height: auto;
+        font-weight: normal;
+        background-color: unset;
+    }
     #menu ul li::before{
         counter-increment: menuH;
         content: counter(menuH) " - ";
@@ -129,6 +150,7 @@ h2::before{
     
     #menu ul li:hover
     {    
+        text-decoration: none;
         background-color: #f6f6f6;
         color: black;
     }
@@ -138,6 +160,8 @@ h2::before{
     }
     
     #contents{
+        margin: 0;
+        padding: 0;
         counter-reset: titre;
     }
     
@@ -159,7 +183,8 @@ h2::before{
         text-align: center;
     }
     
-    .conclusion{
+    #conclusion{
+        float: none;
         text-align: right;
         background-color: black;
         color: #eee;

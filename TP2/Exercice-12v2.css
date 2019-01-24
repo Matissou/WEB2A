@@ -13,6 +13,10 @@
     padding-right: 15px; 
 }
 
+#menu li:hover {
+    text-decoration: underline;
+}
+
 #menu li::before {
     content: "";
     width: 10px;
