@@ -1,0 +1,173 @@
+/* Style CSS des pages du KIOSK 
+ * Basé sur la palette de couleurs tango: http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines#Color_Palette
+ * 
+ * Par:
+ *   Gabriel Besson: gabriel.besson@ensimag.fr 
+ *   Damien Dejean: damien.dejean@ensimag.fr
+ * 
+ * Date: Octobre 2009
+ *
+ * version 0.2
+ */
+
+
+
+
+
+/******************************************************************************/
+/*                              Généralités                                   */
+/******************************************************************************/
+img {
+    /* Pour éviter la bordure si liens */
+    border: none;
+}
+
+a {
+    color: #2e3436;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* classe pour mettre en valeur une partie du texte */
+.emphase {
+    color: #a40000; /* rouge */
+}
+
+/* Classe pour écrire en caractères de largeur constante */
+.Monospace {
+    font-family: Monospace;
+}
+
+
+
+
+
+/******************************************************************************/
+/*                            Contenu central                                 */
+/******************************************************************************/
+
+/*------------------------------*/
+/*       Menu de gauche         */
+/*------------------------------*/
+
+#menu ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+/* Créer des liens en forme de boutons */
+#menu ul a {
+    margin: 5px;
+    padding: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #d3d7cf; /* Gris */
+    display: block;  /* Matérialiser un lien (donner hauteur, largeur, etc...) */
+    height: 28px;
+    line-height: 28px;
+    vertical-align: middle;
+    background-color: white;
+    text-decoration: none;
+}
+
+#menu ul a:hover {
+    border-color: #729fcf; /* Bleu clair */
+    background-color: #cee0f4; /* Bleu encore plus clair */
+}
+
+/* Propager le centrage vertical au icones */
+#menu ul a img {
+    vertical-align: middle;
+    line-height: 28px;
+    margin-bottom: 2px;
+}
+
+
+/*---------------------------*/
+/*  Contenu utile : content  */
+/*---------------------------*/
+#content {
+}
+
+#content a {
+    color: #3465a4; /* Bleu */
+}
+
+#content ul {
+    margin-top : 7px;
+    list-style-type: circle;
+}
+
+#content li, dd {
+    /* aérer les liens de la liste de classe liste_liens */
+    padding-top: 1px;
+    padding-bottom: 2px;
+}
+
+#content ul.liste_liens {
+    /* Utile si l'on veut rajouter une propriété ne s'appliquant qu'aux listes
+     * ayant la classe liste_liens : ce sont celle des liens pour la navigation
+     */
+    margin-top: 0px;
+}
+
+
+#content ul.onglets {
+    margin: 0px;
+    padding: 0px;
+    height: 1.6em;
+}
+#content ul.onglets li {
+    list-style-type: none;
+    font-size: 1.2em;
+    display: block;
+    margin: 0px;
+    float: left;
+    font-weight: bold;
+    color: #4e9a06; /* vert */
+}
+#content ul.onglets li+li {
+    padding-left: 20px;
+}
+#content ul.onglets li a {
+    color : #babdb6;
+}
+
+
+#content dt {
+    font-weight: bold;
+}
+
+#content h2 {
+    color: #4e9a06; /* vert */
+    font-size : 1.2em;
+}
+
+#content h3 {
+/*    color: #274c03;*/ /* vert foncé */
+    font-size : 1.0em;
+    margin-bottom: 3px;
+}
+
+#content h4 {
+}
+
+#content h5 {
+}
+
+#content h6 {
+}
+
+
+#content .tablelogin td {
+    padding: 2px;
+}
+
+/*Message accueil nouveau Kiosk*/
+#content dt{
+	color: #4e9a06;
+}
