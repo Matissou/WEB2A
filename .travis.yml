@@ -4,4 +4,7 @@ install:
   - unzip -j vnu.jar_18.11.5.zip dist/vnu.jar
 
 script: 
-  - java -jar vnu.jar $(find . -name "*.html")
+  #HTML tests
+  - java -jar vnu.jar --html $(find . -name "*.html")
+  #CSS tests
+  - java -jar vnu.jar --css $(find . -name "*.css")
