@@ -9,7 +9,6 @@ body {
   } 
 #menu ul{
     display: inline-flex;
-    width : 400px;
     height: 60px;  
 }
 
@@ -22,8 +21,7 @@ h1::first-letter{
 }
 
 #menu{
-    width : 400px;
-    
+    border-right: none;  
 }
 
 #menu ul li{
