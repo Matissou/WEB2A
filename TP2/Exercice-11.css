@@ -1,6 +1,6 @@
 /* Votre feuille de style */
 #menu, #logo, main, .encart, footer, #recherche, #titre, #pub, .contenu{
-    border: 1px solid red;
+    border: 1px solid black;
 }
 
 header{
@@ -16,6 +16,10 @@ header{
     padding-top:10px;
 }
 
+main{
+    position: relative;
+}
+
 main #menu{
     float:left;
     width:10em;
@@ -28,8 +32,6 @@ main #menu{
 
 .contenu{
     margin-left:10em;
-    margin-bottom: 10em; 
-    padding-left: 10px;      
     padding-bottom:100px;
 }
 
@@ -42,7 +44,6 @@ main #menu{
 #encart1{
     width:10em;
     float:right;
-    clear:both;
 }
 
 #encart2{
@@ -53,8 +54,8 @@ main #menu{
 
 #recherche{
     position: absolute;
-    top: 19ex;
-    right: 2ex; 
+    top: 0;
+    right: 0; 
    margin:auto;
 }
 
