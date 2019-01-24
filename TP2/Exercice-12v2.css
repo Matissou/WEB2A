@@ -70,7 +70,7 @@
     padding-left: 20px;
 }
 
-.section:last-of-type{
+#contents div:nth-last-of-type(2){
     border-top: 2px solid gold; 
 }
 
