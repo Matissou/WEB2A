@@ -116,8 +116,6 @@ a:hover {
 /* Menu de gauche */
 /*----------------*/
 #menu {
-    width: 225px;
-    float: left;
     padding-bottom: 30px;
     border-right: 1px solid #3465a4; /* Bleu */ 
 }
