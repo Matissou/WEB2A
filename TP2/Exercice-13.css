@@ -13,6 +13,14 @@ body {
     height: 60px;  
 }
 
+
+
+
+h1::first-letter{
+    font-size: 200%;
+    color: #8A2BE2;
+}
+
 #menu{
     width : 400px;
     
@@ -26,6 +34,14 @@ body {
     border: 3px solid red;
 }
 
+#menu ul li {
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+  }
+  
+#menu ul li:hover {
+    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
 
 h1 {
     animation-duration: 3s;
