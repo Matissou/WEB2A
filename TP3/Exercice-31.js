@@ -1,7 +1,7 @@
 
 window.onload = function(){
-    //versionSimple();
-    versionPropre();
+    versionSimple();
+    //versionPropre();
 }
 
 
@@ -19,6 +19,7 @@ function versionSimple(){
         li2.appendChild(two);
     
         var li3 = document.createElement("li");
+        li3.setAttribute("class", "last");
         li3.appendChild(three);
     
         var ul = document.createElement("ul");
