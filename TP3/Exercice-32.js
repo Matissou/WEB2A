@@ -29,4 +29,16 @@ window.onload = function(){
         }
         doc.style.color=couleur;
     }
+
+    //Action 3
+    //Tableau des paragraphes
+    var plist = document.getElementsByTagName("p");
+    //Dernier indice du paragraphe changé
+    var plistind = 0;
+    b3.onclick =  function(){
+        if(plistind < plist.length){
+            plist[plistind].style.fontStyle = "italic";
+            plistind ++;
+        }
+    }
 }
