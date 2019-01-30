@@ -22,5 +22,10 @@ window.onload = function(){
 
 
 function switchTheme(){
-
+    var selector = document.getElementById("ltheme"); 
+        var index = selector.selectedIndex+1;
+        if (index == 1){
+            document.getElementById("showMenu").style.display = "none";
+        }
+        document.body.setAttribute("class", 'theme'+index);
 }
