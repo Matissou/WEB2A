@@ -1,7 +1,8 @@
 /* Ce code s'execute bien sur Google Chrome v 71.0 */
+
 window.onload = function(){
-    versionSimple();
-    //versionPropre();
+    //versionSimple();
+    versionPropre();
 }
 
 
@@ -52,6 +53,7 @@ function versionPropre()
         li.appendChild(lli);
         ul.appendChild(li);
     }
+    ul.lastElementChild.setAttribute("class", "last");
     //Puis on ajoute le tout au body
     document.getElementsByTagName("body")[0].appendChild(ul);
 
