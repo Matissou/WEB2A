@@ -1,6 +1,9 @@
+/* Ce code s'execute bien sur Google Chrome v 71.0 */
+
 // Variables globales pour partager entre les fonctions
 var defaultDisplay;
 var checkbox;
+var selector;
 
 window.onload = function(){
     
@@ -18,6 +21,13 @@ function initialize(){
     // quand un changement se produit
     checkbox = document.querySelector("#showMenu");
     checkbox.addEventListener("change",hide);
+
+    //Idem pour réagir au changement dans la liste déroulante
+    selector = document.getElementById("ltheme");
+    selector.addEventListener("change", switchTheme);
+
+    //Par defaut, theme 1 et theme 1 -> checkBox cachée donc on demande une fois a switchTheme de travailler
+    switchTheme();
 }
 
 function hide(){
@@ -36,11 +46,13 @@ function hide(){
 
 
 
-function switchTheme(){
-    var selector = document.getElementById("ltheme"); 
-        var index = selector.selectedIndex+1;
-        if (index == 1){
-            document.getElementById("showMenu").style.display = "none";
-        }
-        document.body.setAttribute("class", 'theme'+index);
+function switchTheme(){ 
+    //Récupération de l'index de l'élément selectionné. Commence a 0 donc +1 pour changer l'attribut class
+    var index = selector.selectedIndex+1;
+    if (index == 1){
+        document.getElementById("showMenu").parentElement.style.display = "none";
+    }else{
+        document.getElementById("showMenu").parentElement.style.display = "";
+    }
+    document.body.setAttribute("class", 'theme'+index);
 }
