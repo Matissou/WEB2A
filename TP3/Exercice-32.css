@@ -1,7 +1,7 @@
 body { 
-	background-color: #ccc; /* couleur de la marge à droite et à gauche */
+	background-color: #ccc; /* couleur de la marge Ã  droite et Ã  gauche */
 	margin: 0;
-	padding: 0 3em; /* pour créer une marge à droite et une à gauche */
+	padding: 0 3em; /* pour crÃ©er une marge Ã  droite et une Ã  gauche */
 	font-family: sans-serif;
 }
 
@@ -14,7 +14,7 @@ body {
 	padding: 1ex 1em;
 }
 
-/* Titre 1 : centré, bleu */
+/* Titre 1 : centrÃ©, bleu */
 h1 {
 	text-align: center;
 	color: #66f;
@@ -27,7 +27,7 @@ h2 {
 }
 
 p {
-	text-indent: 2em;     /* retrait de la première ligne du paragraphe */
+	text-indent: 2em;     /* retrait de la premiÃ¨re ligne du paragraphe */
 	text-align: justify;
 }
 
@@ -36,7 +36,7 @@ p:first-letter {
 	font-size: 150%;
 }
 
-/* trait horizontal pour séparer le pied de page */
+/* trait horizontal pour sÃ©parer le pied de page */
 .conclusion {
 	border-top: 1px solid #999;
 }
@@ -53,7 +53,7 @@ p:first-letter {
 	font-size: 100%;
 }
 
-/* menu non affiché */
+/* menu non affichÃ© */
 #menu {
 	display: none;
 }

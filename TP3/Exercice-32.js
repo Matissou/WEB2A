@@ -1,3 +1,4 @@
+/* Ce code s'execute bien sur Google Chrome v 71.0 */
 window.onload = function(){
 
     // On récupère la couleur par défaut du titre
