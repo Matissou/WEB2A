@@ -5,6 +5,6 @@ install:
 
 script: 
   #HTML tests
-  - java -jar vnu.jar --html $(find . -name "*.html" |grep -i -v "exercice-13")
+  - java -jar vnu.jar --html $(find . -name "*.html" |grep -i -v -e "exercice-13" -e "exercice-36")
   #CSS tests
   - java -jar vnu.jar --css $(find . -name "*.css")
