@@ -1,6 +1,7 @@
 thead tr:nth-child(1){
     background-color:black;
     color : white;
+    font-family: Helvetica, Arial, Sans-Serif;
 }
 
 td:nth-child(3){
@@ -13,6 +14,22 @@ tr:nth-child(even) {
 
 tr:nth-child(odd) {
     background: #FFF;
+}
+
+.inf8{
+    background-color: red;
+}
+
+.eightToTen{
+    background-color:orange;
+}
+
+.tenToTwelve{
+    background-color:yellow;
+}
+
+.supTwelve{
+    background-color: green;   
 }
 
 @media screen and (max-width: 800px) {
