@@ -1,6 +1,11 @@
-window.addEventListener('load', cacherVide , false);
-window.addEventListener('load', colorerLignes , false);
-window.addEventListener('load', nombres , false);
+$(window).on('load', cacherVide)
+$(window).on('load', colorerLignes)
+$(window).on('load', nombres)
+$(window).on('load', function(){
+    $("table").each(function(){
+        raccourcir($(this))
+    })
+} )
 
 // Fonction qui cache les div correspondant aux tbody vides de la page
 function cacherVide(){
@@ -27,4 +32,15 @@ function colorerLignes(){
 function nombres(){
     $("body tr td:nth-child(2)").addClass("nombre")
     $("body tr td:nth-child(3)").addClass("nombre")
+}
+
+function raccourcir(tableau){
+    var bodyTR = tableau.find("tbody tr")
+    if(bodyTR.size()>5){
+        for(var i = 5; i<bodyTR.size(); i++){
+            $(bodyTR[i]).hide()
+        }
+        
+        $("<tr><td>...</td> <td>...</td> <td>...</td></tr>").appendTo(bodyTR.parent())
+    }
 }
