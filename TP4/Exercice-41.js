@@ -12,7 +12,12 @@ function cacherVide(){
     })
 }
 
-
+// Fonction qui colorie les lignes des tableaux
 function colorerLignes(){
-
+    // Ajoute la class lig1 tous les 3 tr en partant de 1
+    $("tbody tr:nth-child(3n+1)").addClass("lig1")
+    // Ajoute la class lig1 tous les 3 tr en partant de 2
+    $("tbody tr:nth-child(3n+2)").addClass("lig2")
+    // Ajoute la class lig1 tous les 3 tr en partant de 3
+    $("tbody tr:nth-child(3n+3)").addClass("lig3")
 }
