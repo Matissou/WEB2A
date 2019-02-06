@@ -4,15 +4,21 @@ v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().loc
 )(valeurCellule(asc ? a : b, idx), valeurCellule(asc ? b : a, idx));
 
 window.onload = function(){
-    let ecouteurs = document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
-    colorationNote();
+//    let ecouteurs = $('#T-1 thead th').on("click",function(      ){
+//             sortColumnH($(this));
+//         });
+
+    let ecouteurs = $("#T-1 th").click({p1:$(this)},sortColumnH)
+
+   //colorationNote();
 }
 
-function sortColumnH(th)
-{
-    const table = th.closest('table');  
-    var delF = [].slice.call(table.querySelectorAll('tr:nth-child(n+1)'),1);
-    let ligneParente = Array.from(th.parentNode.children).indexOf(th)
+function sortColumnH(event)
+{   
+    let th = event.data.p1
+    var table = $("#T-1")
+    var delF = [].slice.call($('#T-1 tr:nth-child(n+1)'),1);
+    let ligneParente = th.cellIndex
     
     let tri = Array.from(delF).sort(comparer(ligneParente, this.asc = !this.asc))
     tri.forEach(tr => table.appendChild(tr) );
