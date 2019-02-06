@@ -7,6 +7,7 @@ window.onload = function(){
     //Ajout des ecouteurs à chaque element th du tableau
     let ecouteurs = document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
     colorationNote();
+    
 }
 
 function sortColumnH(th)
