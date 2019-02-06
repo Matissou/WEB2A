@@ -8,9 +8,9 @@ window.onload = function(){
 //             sortColumnH($(this));
 //         });
 
-    let ecouteurs = $("#T-1 th").click({p1:$(this)},sortColumnH)
+   // let ecouteurs = $("#T-1 th").click({p1:$(this)},sortColumnH)
 
-   //colorationNote();
+   colorationNote();
 }
 
 function sortColumnH(event)
@@ -27,7 +27,7 @@ function sortColumnH(event)
 function colorationNote()
 {
     //Parcourir les cellules et ajouter une des trois classes : vert orange ou rouge
-    let tetes = document.querySelectorAll('th')
+    let tetes = $('th')
     let indexNoteS1
     for(var j = 0; j<tetes.length;j++)
     {
@@ -37,22 +37,22 @@ function colorationNote()
         }
     }
 
-    let tableau = document.getElementById('T-1');
-    let lignes = [].slice.call(tableau.getElementsByTagName('tr'),1)
-
-    for(var i=0; i<lignes.length; i++)
-    {
-        let laNote = lignes[i].children[indexNoteS1]
-        if(laNote.innerHTML<8)
+    indexNoteS1+=1
+    var lignes = $('table tr > td:nth-child('+indexNoteS1+')')
+    lignes.each(function(){
+        var laNote = $(this)
+        if(laNote.html()<8)
         {
-            laNote.setAttribute("class","inf8")
-        }else if(laNote.innerHTML>=8 && laNote.innerHTML<=10)
+            laNote.attr("class","inf8")
+        }else if(laNote.html()>=8 && laNote.html()<=10)
         {
-            laNote.setAttribute("class","eightToTen")   
-        }else if(laNote.innerHTML>10 && laNote.innerHTML<=12){
-            laNote.setAttribute("class","tenToTwelve")
+            laNote.attr("class","eightToTen")   
+        }else if(laNote.html()>10 && laNote.html()<=12){
+            laNote.attr("class","tenToTwelve")
         }else{
-            laNote.setAttribute("class","supTwelve")
+            laNote.attr("class","supTwelve")
         }
-    }
+    });
+
+    
 }
