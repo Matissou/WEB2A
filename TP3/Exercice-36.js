@@ -5,7 +5,9 @@ v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().loc
 
 window.onload = function(){
 
+    //Coloration de l'arbre
     colorationNote();
+    //Suppression des span arbo
     deleteArbo()
 
     let matchMinScreen = window.matchMedia('(max-width: 800px)')
@@ -16,18 +18,18 @@ window.onload = function(){
         ue.forEach(tr => matiereParUE(tr,ue))
     }
     //Ajout des ecouteurs à chaque element th du tableau
-    let ecouteursSort = document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
-
+    document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
 }
 
 function matiereParUE(tr,ue){
-    let table = document.getElementById('T-1')
-    let nomUE = tr.getAttribute('class')
-    let matUE = Array()
 
-    let elementCourant = tr.nextElementSibling
+    //Matieres par UE
+    let matUE = Array()
+    let elementCourant = tr.
+    //On parcours les matières tant que le n'atteind pas une autre UE
     while(elementCourant.getAttribute('class')==null)
     {
+        //On ajoute la matière courante au tableau
         matUE.push(elementCourant)
         elementCourant = elementCourant.nextElementSibling
     }
@@ -37,22 +39,22 @@ function matiereParUE(tr,ue){
         ligne : tr,
         matieres : matUE
     };
+    //Sur la ligne on ajoute un listener avec les matières à afficher/cacher
     trFamily.ligne.addEventListener('click', function(){deplierUE(trFamily);},false)
 }
 
 function deplierUE(family){
-    console.log(family.matieres)
-    
+
     family.matieres.forEach(function(td){
+        //On passe en table row si les matieres ne sont pas visible
         if(td.style.display='none')
         {
             td.style.display='table-row'
-        }else{
-            td.style.display=''
         }
+        //TODO : if display is table row then hid
         
     });
-    console.log("oui")
+    
 }
 
 function deleteArbo(){
@@ -68,9 +70,6 @@ function deleteArbo(){
     }
 
 }
-
-
-
 
 function sortColumnH(th)
 {
