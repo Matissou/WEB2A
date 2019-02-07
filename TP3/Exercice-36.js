@@ -1,11 +1,10 @@
-const valeurCellule = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;    
-const comparer = (idx, asc) => (a, b) => ((v1, v2) => 
+const valeurCellule = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
 v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
 )(valeurCellule(asc ? a : b, idx), valeurCellule(asc ? b : a, idx));
 
 window.onload = function(){
-    //Ajout des ecouteurs à chaque element th du tableau
-    let ecouteursSort = document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
+
     colorationNote();
     deleteArbo()
 
@@ -19,6 +18,9 @@ window.onload = function(){
         ue.forEach(tr => tr.addEventListener('click', function(){deplierUE(tr);}, false));
     }
 
+    //Ajout des ecouteurs à chaque element th du tableau
+    let ecouteursSort = document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
+
 }
 
 function deleteArbo(){
@@ -26,45 +28,43 @@ function deleteArbo(){
     let cellules = document.getElementById('T-1').getElementsByTagName('td')
     for(var i =0; i<cellules.length; i++)
     {
-        //Si la cellule contient un span alors on le supprime du dom 
+        //Si la cellule contient un span alors on le supprime du dom
         if(cellules[i].querySelector('span')!=null)
         {
             cellules[i].removeChild(cellules[i].querySelector('span'))
         }
     }
-    
+
 }
 
 function matiereParUE(tr){
     let table = document.getElementById('T-1')
     let nomUE = tr.getAttribute('class')
     let matUE = Array()
-    
-    let lignes = table.getElementsByTagName('tr')
-    for(var i=0; i<lignes.length;i++)
+
+    let elementCourant = tr
+    while(elementCourant.nextElementSibling.getAttribute('class')==null)
     {
-        let nomClass = lignes[i].getAttribute('class')
-        
-        if(nomClass != null && nomClass.startsWith(nomUE) )
-        {
-            console.log(nomClass)
-        }else{
-           // console.log(nomClass)
-        }
+        let suiv = elementCourant.nextElementSibling
+        matUE.push(suiv)
+        elementCourant = suiv
     }
+
+    console.log(matUE)
+
 }
-   
+
 function deplierUE(tr){
-     
-   
-    
+
+
+
 }
 
 
 function sortColumnH(th)
 {
     //On récupère la table
-    const table = th.closest('table');  
+    const table = th.closest('table');
     //On supprime la ligne de header qui est aussi constitue de td grâce à slice
     var delF = [].slice.call(table.querySelectorAll('tr:nth-child(n+1)'),1)
     let ligneParente = Array.from(th.parentNode.children).indexOf(th)
@@ -94,7 +94,7 @@ function colorationNote()
     let lignes = [].slice.call(tableau.getElementsByTagName('tr'),1)
 
     for(var i=0; i<lignes.length; i++)
-    {   
+    {
         //On stock la note de la ligne i pour savoir quel style appliquer
         let laNote = lignes[i].children[indexNoteS1]
         if(laNote.innerHTML<8)
@@ -104,7 +104,7 @@ function colorationNote()
             laNote.setAttribute("class","inf8")
         }else if(laNote.innerHTML>=8 && laNote.innerHTML<=10)
         {
-            laNote.setAttribute("class","eightToTen")   
+            laNote.setAttribute("class","eightToTen")
         }else if(laNote.innerHTML>10 && laNote.innerHTML<=12){
             laNote.setAttribute("class","tenToTwelve")
         }else{
