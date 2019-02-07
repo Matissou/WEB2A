@@ -5,9 +5,7 @@ v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().loc
 
 window.onload = function(){
 
-    //Coloration de l'arbre
     colorationNote();
-    //Suppression des span arbo
     deleteArbo()
 
     let matchMinScreen = window.matchMedia('(max-width: 800px)')
@@ -15,46 +13,44 @@ window.onload = function(){
         //On récupère toutes les UE
         let ue = document.querySelectorAll('tr.UE')
         //On leur ajoute leur matières respective
-        ue.forEach(tr => matiereParUE(tr,ue))
+        ue.forEach(tr => matiereParUE(tr))
     }
     //Ajout des ecouteurs à chaque element th du tableau
-    document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
+    let ecouteursSort = document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
+
 }
 
-function matiereParUE(tr,ue){
-
-    //Matieres par UE
+function matiereParUE(tr){
     let matUE = Array()
-    let elementCourant = tr.
-    //On parcours les matières tant que le n'atteind pas une autre UE
+
+    //On parcours les voisins jusqu'à la prochaine UE
+    let elementCourant = tr.nextElementSibling
     while(elementCourant.getAttribute('class')==null)
     {
-        //On ajoute la matière courante au tableau
+        //On ajout les matières pour cette UE et on passe à la suivante
         matUE.push(elementCourant)
         elementCourant = elementCourant.nextElementSibling
     }
-    console.log(matUE)
      //On ajoute les listeners dessus
     let trFamily = {
         ligne : tr,
         matieres : matUE
     };
-    //Sur la ligne on ajoute un listener avec les matières à afficher/cacher
-    trFamily.ligne.addEventListener('click', function(){deplierUE(trFamily);},false)
+    //On ajoute à la ligne l'écouteur pour déplier les matières de l'UE
+    tr.addEventListener('click', function(){deplierUE(trFamily);},false)
 }
 
 function deplierUE(family){
-
-    family.matieres.forEach(function(td){
-        //On passe en table row si les matieres ne sont pas visible
+        family.matieres.forEach(function(td){
         if(td.style.display='none')
         {
             td.style.display='table-row'
         }
-        //TODO : if display is table row then hid
-        
+         //TODO : if display is table row then hid
+        else{
+            td.style.display='block'
+        }
     });
-    
 }
 
 function deleteArbo(){
@@ -68,7 +64,6 @@ function deleteArbo(){
             cellules[i].removeChild(cellules[i].querySelector('span'))
         }
     }
-
 }
 
 function sortColumnH(th)
