@@ -7,25 +7,57 @@ window.onload = function(){
     //Ajout des ecouteurs à chaque element th du tableau
     let ecouteursSort = document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
     colorationNote();
-    
-}
+    deleteArbo()
 
-
-window.onresize = function(){
-
-    let ecouteursUe;
     let matchMinScreen = window.matchMedia('(max-width: 800px)')
     if(matchMinScreen.matches){
-        document.querySelectorAll('tr.UE').forEach(tr => tr.addEventListener('click', function(){deplierUE(tr);}, false));
-    }else{
-        let ecouteursUe = null;   
-        //document.querySelectorAll('th').forEach(tr => tr.removeEventListener('click', function(){deplierUE(tr);}, false));
+        //On récupère toutes les UE
+        let ue = document.querySelectorAll('tr.UE')
+        //On leur ajoute leur matières respective
+        ue.forEach(tr => matiereParUE(tr))
+        //On ajoute les listeners dessus
+        ue.forEach(tr => tr.addEventListener('click', function(){deplierUE(tr);}, false));
     }
 
 }
 
+function deleteArbo(){
+    //cellules
+    let cellules = document.getElementById('T-1').getElementsByTagName('td')
+    for(var i =0; i<cellules.length; i++)
+    {
+        //Si la cellule contient un span alors on le supprime du dom 
+        if(cellules[i].querySelector('span')!=null)
+        {
+            cellules[i].removeChild(cellules[i].querySelector('span'))
+        }
+    }
+    
+}
+
+function matiereParUE(tr){
+    let table = document.getElementById('T-1')
+    let nomUE = tr.getAttribute('class')
+    let matUE = Array()
+    
+    let lignes = table.getElementsByTagName('tr')
+    for(var i=0; i<lignes.length;i++)
+    {
+        let nomClass = lignes[i].getAttribute('class')
+        
+        if(nomClass != null && nomClass.startsWith(nomUE) )
+        {
+            console.log(nomClass)
+        }else{
+           // console.log(nomClass)
+        }
+    }
+}
+   
 function deplierUE(tr){
-    alert('ok ecouteur')
+     
+   
+    
 }
 
 
