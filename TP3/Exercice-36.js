@@ -13,14 +13,46 @@ window.onload = function(){
         //On récupère toutes les UE
         let ue = document.querySelectorAll('tr.UE')
         //On leur ajoute leur matières respective
-        ue.forEach(tr => matiereParUE(tr))
-        //On ajoute les listeners dessus
-        ue.forEach(tr => tr.addEventListener('click', function(){deplierUE(tr);}, false));
+        ue.forEach(tr => matiereParUE(tr,ue))
     }
-
     //Ajout des ecouteurs à chaque element th du tableau
     let ecouteursSort = document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
 
+}
+
+function matiereParUE(tr,ue){
+    let table = document.getElementById('T-1')
+    let nomUE = tr.getAttribute('class')
+    let matUE = Array()
+
+    let elementCourant = tr.nextElementSibling
+    while(elementCourant.getAttribute('class')==null)
+    {
+        matUE.push(elementCourant)
+        elementCourant = elementCourant.nextElementSibling
+    }
+    console.log(matUE)
+     //On ajoute les listeners dessus
+    let trFamily = {
+        ligne : tr,
+        matieres : matUE
+    };
+    trFamily.ligne.addEventListener('click', function(){deplierUE(trFamily);},false)
+}
+
+function deplierUE(family){
+    console.log(family.matieres)
+    
+    family.matieres.forEach(function(td){
+        if(td.style.display='none')
+        {
+            td.style.display='table-row'
+        }else{
+            td.style.display=''
+        }
+        
+    });
+    console.log("oui")
 }
 
 function deleteArbo(){
@@ -37,28 +69,7 @@ function deleteArbo(){
 
 }
 
-function matiereParUE(tr){
-    let table = document.getElementById('T-1')
-    let nomUE = tr.getAttribute('class')
-    let matUE = Array()
 
-    let elementCourant = tr
-    while(elementCourant.nextElementSibling.getAttribute('class')==null)
-    {
-        let suiv = elementCourant.nextElementSibling
-        matUE.push(suiv)
-        elementCourant = suiv
-    }
-
-    console.log(matUE)
-
-}
-
-function deplierUE(tr){
-
-
-
-}
 
 
 function sortColumnH(th)
