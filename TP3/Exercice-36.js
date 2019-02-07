@@ -5,10 +5,29 @@ v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().loc
 
 window.onload = function(){
     //Ajout des ecouteurs à chaque element th du tableau
-    let ecouteurs = document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
+    let ecouteursSort = document.querySelectorAll('th').forEach(th => th.addEventListener('click',function(){sortColumnH(th);},false));
     colorationNote();
     
 }
+
+
+window.onresize = function(){
+
+    let ecouteursUe;
+    let matchMinScreen = window.matchMedia('(max-width: 800px)')
+    if(matchMinScreen.matches){
+        document.querySelectorAll('tr.UE').forEach(tr => tr.addEventListener('click', function(){deplierUE(tr);}, false));
+    }else{
+        let ecouteursUe = null;   
+        //document.querySelectorAll('th').forEach(tr => tr.removeEventListener('click', function(){deplierUE(tr);}, false));
+    }
+
+}
+
+function deplierUE(tr){
+    alert('ok ecouteur')
+}
+
 
 function sortColumnH(th)
 {

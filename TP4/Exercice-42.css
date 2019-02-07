@@ -4,18 +4,24 @@ thead tr:nth-child(1){
     font-family: Helvetica, Arial, Sans-Serif;
 }
 
-td:nth-child(3){
-    background-color: #87CEEB;
-}
 
+/* En gris une ligne sur deux */
 tr:nth-child(even) {
     background: #CCC;
 }
 
+/* En blanc une ligne sur deux*/
 tr:nth-child(odd) {
     background: #FFF;
 }
 
+/* La colonne des UE en cyan, l'indication important permet au style
+de ne pas se faire ecraser par la coloration des lignes*/
+tr.UE{
+    background: #87CEEB!important;
+}
+
+/* Coloration syntaxique (voir fonction colorationNote */
 .inf8{
     background-color: red;
 }
@@ -33,12 +39,17 @@ tr:nth-child(odd) {
 }
 
 @media screen and (max-width: 800px) {
-    td,th{
+    tr.UE{
+        display:table-row;
+    }
+    
+    tr,tr td{
         display:none;
     }
 
-    td:nth-child(4),th:nth-child(4), td:nth-child(6), th:nth-child(6){
-        display:initial;
+    /* */
+    tr td:nth-child(4), tr td:nth-child(6){
+        display:table-cell;
         
     }
 }

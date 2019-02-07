@@ -29,7 +29,7 @@ function sortColumnH(event)
 function colorationNote()
 {
     //Parcourir les cellules et ajouter une des trois classes : vert orange ou rouge
-    let tetes = $('th')
+    let tetes = $('th') 
     console.log(indexNoteS1)
     
     for(var j = 0; j<tetes.length;j++)
