@@ -41,14 +41,12 @@ function matiereParUE(tr){
 }
 
 function deplierUE(family){
-        family.matieres.forEach(function(td){
-        if(td.style.display='none')
+    family.matieres.forEach(function(td){
+        if(td.style.display == 'none' || td.style.display == '')
         {
             td.style.display='table-row'
-        }
-         //TODO : if display is table row then hid
-        else{
-            td.style.display='block'
+        } else{
+            td.style.display='none'
         }
     });
 }
