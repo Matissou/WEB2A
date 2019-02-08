@@ -7,6 +7,7 @@ $(window).on('load', function(){
     })
 } )
 $(window).on('load', initClicEnteteTableaux)
+$(window).on('load', initClicH2)
 
 // Fonction qui cache les div correspondant aux tbody vides de la page
 function cacherVide(){
@@ -42,7 +43,7 @@ function raccourcir(tableau){
             $(bodyTR[i]).hide()
         }
         
-        $("<tr><td>...</td> <td>...</td> <td>...</td></tr>").appendTo(bodyTR.parent())
+        $("<tr><td>...</td> <td>...</td> <td>...</td></tr>").css("text-align", "center").appendTo(bodyTR.parent())
     }
 }
 
@@ -67,4 +68,16 @@ function initClicEnteteTableaux(){
         })
     })
 
+}
+
+function initClicH2(){
+    $("h2").each(function(){
+        $(this).on('click', clicH2)
+    })
+}
+
+function clicH2(){
+    $(this)
+    .animate({"padding-left": "20%"}, 1000)
+    .animate({"padding-left": "0"}, 1000)
 }
