@@ -3,15 +3,8 @@ const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
 v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
 )(valeurCellule(asc ? a : b, idx), valeurCellule(asc ? b : a, idx));
 
-window.onload = function(){
-//    let ecouteurs = $('#T-1 thead th').on("click",function(      ){
-//             sortColumnH($(this));
-//         });
-
-   // let ecouteurs = $("#T-1 th").click({p1:$(this)},sortColumnH)
-
-   colorationNote();
-}
+$(window).on('load', deleteArbo)
+$(window).on('load', colorationNote)
 
 function sortColumnH(event)
 {   
@@ -30,7 +23,6 @@ function colorationNote()
 {
     //Parcourir les cellules et ajouter une des trois classes : vert orange ou rouge
     let tetes = $('th') 
-    console.log(indexNoteS1)
     
     for(var j = 0; j<tetes.length;j++)
     {
@@ -60,4 +52,9 @@ function colorationNote()
     });
 
     
+}
+
+// Supprime l'arborescence
+function deleteArbo(){
+    $(".arbo").remove()
 }
