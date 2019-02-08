@@ -6,6 +6,7 @@ $(window).on('load', function(){
         raccourcir($(this))
     })
 } )
+$(window).on('load', initClicEnteteTableaux)
 
 // Fonction qui cache les div correspondant aux tbody vides de la page
 function cacherVide(){
@@ -43,4 +44,27 @@ function raccourcir(tableau){
         
         $("<tr><td>...</td> <td>...</td> <td>...</td></tr>").appendTo(bodyTR.parent())
     }
+}
+
+function rallonger(tableau){
+    var tbody = tableau.find("tbody")
+    // trouve tous les elements cachés et les montres
+    tbody.find(":hidden").show()
+    // Enlève les ... de la fin
+    tbody.children().last().remove()
+}
+
+function initClicEnteteTableaux(){
+    $("thead th").each(function(){
+        $(this).addClass("cliquable")
+        $(this).on('click', function(){
+            var tab = $(this).parents().find("table")
+            if (tab.find(":hidden").size() > 0){
+                rallonger(tab)
+            }else{
+                raccourcir(tab)
+            }
+        })
+    })
+
 }
