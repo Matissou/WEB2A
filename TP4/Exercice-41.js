@@ -58,7 +58,7 @@ function initClicEnteteTableaux(){
     $("thead th").each(function(){
         $(this).addClass("cliquable")
         $(this).on('click', function(){
-            var tab = $(this).parents().find("table")
+            var tab = $(this).parents("table")
             if (tab.find(":hidden").size() > 0){
                 rallonger(tab)
             }else{
