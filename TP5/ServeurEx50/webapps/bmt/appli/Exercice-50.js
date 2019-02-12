@@ -46,7 +46,7 @@ function selectObjectType(type) {
 function listBookmarks() {
 	//Vider div id=items
 	$("#items").empty()
-	var jqxhr = $.get( wsBase+"bookmarks")
+	$.get( wsBase+"bookmarks")
 		.done(function(json) {
 			$(json).each(function(){
 				var bkmrq = $(".model.bookmark").clone()
@@ -140,7 +140,11 @@ function clickTag() {
 
 /* Performs the modification of a tag */
 function modifyTag() {
-	//TODO 8
+	var newname = undefined //TODO
+	var tid = $(".tag.item:selected").attr("num")
+	json = JSON.stringify({ id: tid, name: newname})
+	$.post(wsBase+"tags/"+tid, json)
+		.always(listTags())
 }
 
 /* Removes a tag */
