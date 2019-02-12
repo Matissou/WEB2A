@@ -49,12 +49,47 @@ function listBookmarks() {
 
 /* Loads the list of all tags and displays them */
 function listTags() {
-	//TODO 5
+	//TO FINISH ! 
+	//vider items de son eventuel contenu
+	$('#items').empty()
+
+
+
+	var url = wsBase+"tags"
+
+	$.get(url,function(data){
+		$(data).each(function(){
+		
+			//clone model tag
+			let modelTag = $('div .model.tag')
+			let theclone = modelTag.clone()
+			//remplacer le text du h2
+			console.log(this.name)
+			theclone.find('h2').text(this.name)
+			//ajouter l'attribut num au div du tag
+			theclone.attr('num', this.id)
+			theclone.removeClass('model').addClass('item')
+			$('#items').append(theclone)
+		})
+		
+	}).fail(function(){
+
+	})	
+	
 }
 
 /* Adds a new tag */
 function addTag() {
-	//TODO 6
+	//get input text
+	let inputVal = $('#add .tag input').val()
+	if(inputVal=="")
+	{
+		alert("La chaîne est vide")
+	}else{
+		let tag = JSON.stringify({ id: 1, name: inputVal });
+		$.post(wsBase+'tags', {json:tag}).always(listTags())
+	}
+
 }
 
 /* Handles the click on a tag */
@@ -75,7 +110,7 @@ function removeTag() {
 $(function() {
 	// Put the name of the current user into <h1>
 	setIdentity()
-
+	listTags()
 	// Adapt the height of <div id="contents"> to the navigator window
 	setContentHeight()
 
