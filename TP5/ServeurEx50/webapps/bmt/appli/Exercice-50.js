@@ -1,19 +1,45 @@
 /* Base URL of the web-service for the current user */
-var wsBase = 'http://localhost:8080/bmt/login1-login2-login3/'
+var wsBase = '/bmt/rossolo-landaism/'
 /* Shows the identity of the current user */ 
 function setIdentity() {
-	//TODO 1
-}
+	//On split avec le slash et on récupère le deuxième élément qui est le pseudo (rossolo-landaism)
+	$('h1 .identity').text(wsBase.split("/")[2])
+}	
 
 /* Sets the height of <div id="#contents"> to benefit from all the remaining place on the page */
 function setContentHeight() {
-	// TODO 2
+	
 }
 
 
 /* Selects a new object type : either "bookmarks" or "tags" */
 function selectObjectType(type) {
-	// TODO 3
+	
+	//Type couramment affiché (selected)
+	typeDefault = $("#menu li.selected");
+	//Si le type demandé est différent du type courant
+	if(!(type==typeDefault.text()))
+	{
+		//Mettre le type courant à vide
+		typeDefault.removeClass("selected")
+		//et on ajoute la classe selected au type demandé
+		$('#menu li.'+type).addClass("selected")
+		
+		//# : id, . : class
+		switch (type) {
+			case  "bookmarks":
+				//appel de la fonction listBookmarks
+				listBookmarks()
+				//Enlever la class selected du div class tag
+				$("#add .tag").removeClass('selected')
+				break;
+			default:
+				//sinon, le type demandé est tags 
+				listTags()
+				$("#add .tag").addClass('selected')
+				break;
+		}
+	}	
 }
 
 /* Loads the list of all bookmarks and displays them */
@@ -52,6 +78,7 @@ $(function() {
 
 	// Adapt the height of <div id="contents"> to the navigator window
 	setContentHeight()
+
 	// Listen to the clicks on menu items
 	$('#menu li').on('click', function() {
 		var isTags = $(this).hasClass('tags')
