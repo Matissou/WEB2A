@@ -19,3 +19,6 @@ bin
 *.bak
 *.jar
 *.pdf
+
+TP5/ServeurEx50/TP5.lock.db
+TP5/ServeurEx50/TP5.h2.db
