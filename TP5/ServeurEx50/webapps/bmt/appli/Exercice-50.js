@@ -49,11 +49,8 @@ function listBookmarks() {
 
 /* Loads the list of all tags and displays them */
 function listTags() {
-	//TO FINISH ! 
 	//vider items de son eventuel contenu
 	$('#items').empty()
-
-
 
 	var url = wsBase+"tags"
 
@@ -73,7 +70,7 @@ function listTags() {
 		})
 		
 	}).fail(function(){
-
+		alert("ERROR")
 	})	
 	
 }
@@ -94,7 +91,25 @@ function addTag() {
 
 /* Handles the click on a tag */
 function clickTag() {
-	//TODO 7
+	
+	//ne rien faire si le tag est deja selectionné
+	if(!($(this).hasClass('selected')))
+	{
+		//On enleve la selection de l'ancien element selectionné
+		let oldSelected = $('#items .item.tag.selected')
+		oldSelected.removeClass('selected')
+		h2Hidden = oldSelected.find('h2').clone()
+		oldSelected.empty()
+		oldSelected.append(h2Hidden.show())
+		
+		$(this).addClass('selected')
+		$(this).find('h2').hide()
+		let oldName = $(this).find('h2').text()
+		$(this).append("<input type=\"text\" value=\""+oldName+"\">")
+		$(this).append("<input type=\"button\" id=\"modifyTag\" value=\"Modify name\">")
+		$(this).append("<input type=\"button\" id=\"removeTag\" value=\"Remove tag\">")
+	}
+
 }
 
 /* Performs the modification of a tag */
