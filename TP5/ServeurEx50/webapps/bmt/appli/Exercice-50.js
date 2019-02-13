@@ -112,7 +112,29 @@ function addTag() {
 		let tag = JSON.stringify({ id: 1, name: inputVal });
 		$.post(wsBase+'tags', {json:tag}).always(listTags())
 	}
+}
 
+function addBookmark()
+{
+	//TODO : de façon analogue à 
+	//TODO : voir s'il est possible de factoriser
+}
+
+function removeBookmark()
+{
+	//TODO : de façon analogue à removeTag
+	//TODO : voir s'il est possible de factoriser
+}
+
+function clickBookmark()
+{
+	//TODO : de façon analogue à removeTag
+	//TODO : voir s'il est possible de factoriser
+}
+
+function modifyBookmark()
+{
+	
 }
 
 /* Handles the click on a tag */
@@ -157,13 +179,18 @@ function modifyTag() {
 
 /* Removes a tag */
 function removeTag() {
-	//TODO 9
+	let tid = $(".tag.item.selected").attr("num")
+	//Supprimer le tag 
+	$.ajax({
+		url:wsBase+"tags/"+tid+"?x-http-method=delete",
+		type:"DELETE"
+	}).always(listTags())	
 } 
 /* On document loading */
 $(function() {
 	// Put the name of the current user into <h1>
 	setIdentity()
-	listTags()
+
 	// Adapt the height of <div id="contents"> to the navigator window
 	setContentHeight()
 
