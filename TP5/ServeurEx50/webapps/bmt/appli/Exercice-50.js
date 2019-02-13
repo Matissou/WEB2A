@@ -130,21 +130,29 @@ function clickTag() {
 			$(this).addClass('selected')
 			$(this).find('h2').hide()
 			let oldName = $(this).find('h2').text()
-			$(this).append("<input type=\"text\" value=\""+oldName+"\">")
+			$(this).append("<input type=\"text\" id=\"modifiedInputTag\" value=\""+oldName+"\">")
 			$(this).append("<input type=\"button\" id=\"modifyTag\" value=\"Modify name\">")
+			$('#modifyTag').click(function(){modifyTag();})
 			$(this).append("<input type=\"button\" id=\"removeTag\" value=\"Remove tag\">")
-
+			$('#removeTag').click(function(){removeTag();})
 		}
 }
 
 
 /* Performs the modification of a tag */
 function modifyTag() {
-	var newname = undefined //TODO
-	var tid = $(".tag.item:selected").attr("num")
-	json = JSON.stringify({ id: tid, name: newname})
-	$.post(wsBase+"tags/"+tid, json)
-		.always(listTags())
+	
+	let newname = $('#modifiedInputTag').val()
+	let tid = $(".tag.item.selected").attr("num")
+	let tag = JSON.stringify({ id: tid, name: newname})
+	
+	//Supprimer l'ancien tag avec l'url ci dessous
+	$.ajax({
+	 	url:wsBase+"tags/"+tid+"?x-http-method=delete",
+	 	type:"DELETE"
+	 })
+	//Faire un post avec les nouvelles valeurs du tag
+	 $.post(wsBase+"tags", {json:tag}).always(listTags())
 }
 
 /* Removes a tag */
