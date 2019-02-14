@@ -265,7 +265,16 @@ function removeTag() {
 function removeBookmark()
 {
 	let bid = $(".bookmark.item.selected").attr("num")
-	
+	//Supprimer le tag 
+	$.ajax({
+		url:wsBase+"bookmarks/"+bid+"?x-http-method=delete",
+		type:"DELETE",
+	})
+	.fail(function(xhr, status, err){
+		console.error("Unable to remove bookmark !")
+		displayError(xhr, status, err)
+	})
+	.done(listBookmarks)
 }
 
 
