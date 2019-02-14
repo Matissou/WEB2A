@@ -169,13 +169,14 @@ function modifyTag() {
 	let tid = $(".tag.item.selected").attr("num")
 	let tag = JSON.stringify({ id: tid, name: newname})
 	
-	//Supprimer l'ancien tag avec l'url ci dessous
+	//Modification de l'ancien tag
 	$.ajax({
-	 	url:wsBase+"tags/"+tid+"?x-http-method=delete",
-	 	type:"DELETE"
-	 })
-	//Faire un post avec les nouvelles valeurs du tag
-	 $.post(wsBase+"tags", {json:tag}).always(listTags())
+	 	url:wsBase+"tags/"+tid,
+		 type:"PUT",
+		 data: {json:tag}
+	})
+	.fail("Unable to modify tag")
+	.done(listTags)
 }
 
 /* Removes a tag */
