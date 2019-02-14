@@ -12,36 +12,6 @@ function setContentHeight() {
 }
 
 
-/* Selects a new object type : either "bookmarks" or "tags" */
-function selectObjectType(type) {
-	
-	//Type couramment affiché (selected)
-	typeDefault = $("#menu li.selected");
-	//Si le type demandé est différent du type courant
-	if(!(type==typeDefault.text()))
-	{
-		//Mettre le type courant à vide
-		typeDefault.removeClass("selected")
-		//et on ajoute la classe selected au type demandé
-		$('#menu li.'+type).addClass("selected")
-		
-		//# : id, . : class
-		switch (type) {
-			case  "bookmarks":
-				//appel de la fonction listBookmarks
-				listBookmarks()
-				//Enlever la class selected du div class tag
-				$("#add .tag").removeClass('selected')
-				break;
-			default:
-				//sinon, le type demandé est tags 
-				listTags()
-				$("#add .tag").addClass('selected')
-				break;
-		}
-	}	
-}
-
 /* Loads the list of all bookmarks and displays them */
 function listBookmarks() {
 	//Vider div id=items
@@ -116,14 +86,35 @@ function addTag() {
 
 function addBookmark()
 {
-	//TODO : de façon analogue à 
-	//TODO : voir s'il est possible de factoriser
+	//get input text
+	let titre = $('#add .bookmark #titleBM').val()
+	let desc = $('#add .bookmark #descBM').val()
+	let lien = $('#add .bookmark #linkBM').val()
+	console.log(titre)
+	console.log(desc)
+	console.log(lien)
+	if(titre =="" || desc == "" || lien=="")
+	{ 
+		alert("Un des paramètres n'est pas correct")
+	}else{
+		//TODO : ajouter les tags 
+		//let tag = JSON.stringify({id: 1, title: titre, description: desc, link:lien });
+	//	$.post(wsBase+'bookmarks', {json:tag}).always(listBookmarks())
+		console.log(wsBase)
+		let tag = {title:"HTML oui", "description":"", "link":"http://www.w3schools.com/html/", "tags":[{"id":38, "name":"HTML"}]}
+		$.post(wsBase+'bookmarks', {json:tag}).success(alert("bonjour"))
+		listBookmarks()
+
+	}			
 }
 
 function removeBookmark()
 {
-	//TODO : de façon analogue à removeTag
-	//TODO : voir s'il est possible de factoriser
+	
+
+
+
+	
 }
 
 function clickBookmark()
@@ -134,7 +125,7 @@ function clickBookmark()
 
 function modifyBookmark()
 {
-	
+
 }
 
 /* Handles the click on a tag */
@@ -205,7 +196,44 @@ $(function() {
 
 	// Listen to clicks on the "add tag" button
 	$('#addTag').on('click', addTag)
-
+	$('#addBookmark').on('click', addBookmark)
+	
 	// Listen to clicks on the tag items
 	$(document).on('click','#items .item.tag',clickTag)
+	$(document).on('click', '#items .item.bookmark', clickBookmark)
+
 })
+
+/* Selects a new object type : either "bookmarks" or "tags" */
+function selectObjectType(type) {
+	
+	//Type couramment affiché (selected)
+	typeDefault = $("#menu li.selected");
+	//Si le type demandé est différent du type courant
+	if(!(type==typeDefault.text()))
+	{
+		//Mettre le type courant à vide
+		typeDefault.removeClass("selected")
+		//et on ajoute la classe selected au type demandé
+		$('#menu li.'+type).addClass("selected")
+		
+		//# : id, . : class
+		switch (type) {
+			case  "bookmarks":
+				//appel de la fonction listBookmarks
+				listBookmarks()
+				// on ajoute la classe selected pour voir l'input
+				$('#add .bookmark').addClass('selected')				
+				//Enlever la class selected du div class tag
+				$("#add .tag").removeClass('selected')
+				break;
+			case "tags":
+				//sinon, le type demandé est tags 
+				listTags()
+				$("#add .tag").addClass('selected')
+				//on enleve la classe selected de bookmark
+				$("#add .bookmark").removeClass('selected')
+				break;
+		}
+	}	
+}
