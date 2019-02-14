@@ -57,7 +57,6 @@ function listTags() {
 			let modelTag = $('div .model.tag')
 			let theclone = modelTag.clone()
 			//remplacer le text du h2
-			console.log(this.name)
 			theclone.find('h2').text(this.name)
 			//ajouter l'attribut num au div du tag
 			theclone.attr('num', this.id)
@@ -66,7 +65,7 @@ function listTags() {
 		})
 		
 	}).fail(function(){
-
+		alert( "Error : unable to get tags" );
 	})	
 	
 }
@@ -79,8 +78,10 @@ function addTag() {
 	{
 		alert("La chaîne est vide")
 	}else{
-		let tag = JSON.stringify({ id: 1, name: inputVal });
-		$.post(wsBase+'tags', {json:tag}).always(listTags())
+		let tag = JSON.stringify({name: inputVal });
+		$.post(wsBase+'tags', {json:tag})
+		.fail("Unable to add tag")
+		.done(listTags)
 	}
 }
 
