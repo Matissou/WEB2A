@@ -61,7 +61,7 @@ h1 {
 	display: none;
 }
 
-#add .bookmark, #add .tag {
+#add .bookmark, #add .tag, #add .bookmark {
 	display: none;
 	margin-top: 2ex;
 }
@@ -69,6 +69,8 @@ h1 {
 #add .bookmark.selected, #add .tag.selected {
 	display: block;
 }
+
+
 
 .item {
 	border: 1px solid #ccc;
