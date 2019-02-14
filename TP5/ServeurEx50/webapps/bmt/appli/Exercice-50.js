@@ -97,20 +97,17 @@ function addBookmark()
 	let titre = $('#add .bookmark #titleBM').val()
 	let desc = $('#add .bookmark #descBM').val()
 	let lien = $('#add .bookmark #linkBM').val()
-	console.log(titre)
-	console.log(desc)
-	console.log(lien)
 	if(titre =="" || desc == "" || lien=="")
 	{ 
 		alert("Un des paramètres n'est pas correct")
 	}else{
-		//TODO : ajouter les tags 
-		//let tag = JSON.stringify({id: 1, title: titre, description: desc, link:lien });
-	//	$.post(wsBase+'bookmarks', {json:tag}).always(listBookmarks())
-		console.log(wsBase)
-		let tag = {title:"HTML oui", "description":"", "link":"http://www.w3schools.com/html/", "tags":[{"id":38, "name":"HTML"}]}
-		$.post(wsBase+'bookmarks', {json:tag}).success(alert("bonjour"))
-		listBookmarks()
+		let bookmark = JSON.stringify({title:titre, "description":desc, "link":lien, "tags":[]})
+		$.post(wsBase+'bookmarks', {json:bookmark})
+		.done(listBookmarks)
+		.fail(function(xhr, status, err){
+			console.error("Unable to create bookmark !")
+			displayError(xhr, status, err)
+		})
 
 	}			
 }
