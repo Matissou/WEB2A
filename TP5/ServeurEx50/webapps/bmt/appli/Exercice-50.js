@@ -37,8 +37,9 @@ function listBookmarks() {
 			})
 			
 		})
-		.fail(function() {
-		  alert( "Error : unable to get boomarks" );
+		.fail(function(xhr, status, err){
+			console.error("Unable to get bookmarks !")
+			displayError(xhr, status, err)
 		})
 }
 
@@ -64,9 +65,11 @@ function listTags() {
 			$('#items').append(theclone)
 		})
 		
-	}).fail(function(){
-		alert( "Error : unable to get tags" );
-	})	
+	})
+	.fail(function(xhr, status, err){
+		console.error("Unable to get tags !")
+		displayError(xhr, status, err)
+	})
 	
 }
 
@@ -80,7 +83,10 @@ function addTag() {
 	}else{
 		let tag = JSON.stringify({name: inputVal });
 		$.post(wsBase+'tags', {json:tag})
-		.fail("Unable to add tag")
+		.fail(function(xhr, status, err){
+			console.error("Unable to add tag !")
+			displayError(xhr, status, err)
+		})
 		.done(listTags)
 	}
 }
@@ -166,7 +172,10 @@ function modifyTag() {
 		 type:"PUT",
 		 data: {json:tag}
 	})
-	.fail("Unable to modify tag")
+	.fail(function(xhr, status, err){
+		console.error("Unable to modify tag !")
+		displayError(xhr, status, err)
+	})
 	.done(listTags)
 }
 
@@ -176,9 +185,20 @@ function removeTag() {
 	//Supprimer le tag 
 	$.ajax({
 		url:wsBase+"tags/"+tid+"?x-http-method=delete",
-		type:"DELETE"
-	}).always(listTags())	
+		type:"DELETE",
+	})
+	.fail(function(xhr, status, err){
+		console.error("Unable to remove tag !")
+		displayError(xhr, status, err)
+	})
+	.done(listTags)
 } 
+
+//Fonction that display errors on an alert
+function displayError(req, status, err){
+	alert("Sorry, an error occured : "+err)
+}
+
 /* On document loading */
 $(function() {
 	// Put the name of the current user into <h1>
