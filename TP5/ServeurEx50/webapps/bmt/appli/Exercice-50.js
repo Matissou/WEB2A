@@ -12,36 +12,7 @@ function setContentHeight() {
 }
 
 
-/* Loads the list of all bookmarks and displays them */
-function listBookmarks() {
-	//Vider div id=items
-	$("#items").empty()
-	$.get( wsBase+"bookmarks")
-		.done(function(json) {
-			$(json).each(function(){
-				var bkmrq = $(".model.bookmark").clone()
-				bkmrq.find("h2").text(this.title)
 
-				bkmrq.find("a").text(this.link).attr("href", this.link)
-
-				bkmrq.find(".description").text(this.description)
-				
-				bkmrq.attr("num", this.id)
-				bkmrq.removeClass("model")
-				bkmrq.addClass("item")
-				$(this.tags).each(function(){
-					bkmrq.find(".tags").append("<li>"+this.name+"</li>")
-				})
-
-				$("#items").append(bkmrq)
-			})
-			
-		})
-		.fail(function(xhr, status, err){
-			console.error("Unable to get bookmarks !")
-			displayError(xhr, status, err)
-		})
-}
 
 /* Loads the list of all tags and displays them */
 function listTags() {
@@ -199,15 +170,14 @@ function addBookmark()
 	}			
 }
 
-
-
 /* Performs the modification of a tag */
 function modifyTag() {
 	
 	let newname = $('#modifiedInputTag').val()
 	let tid = $(".tag.item.selected").attr("num")
 	let tag = JSON.stringify({ id: tid, name: newname})
-	
+
+
 	//Modification de l'ancien tag
 	$.ajax({
 	 	url:wsBase+"tags/"+tid,
@@ -221,26 +191,81 @@ function modifyTag() {
 	.done(listTags)
 }
 
+/* Loads the list of all bookmarks and displays them */
+function listBookmarks() {
+	//Vider div id=items
+	$("#items").empty()
+	$.get( wsBase+"bookmarks")
+		.done(function(json) {
+			$(json).each(function(){
+				var bkmrq = $(".model.bookmark").clone()
+				bkmrq.find("h2").text(this.title)
+
+				bkmrq.find("a").text(this.link).attr("href", this.link)
+
+				bkmrq.find(".description").text(this.description)
+				
+				bkmrq.attr("num", this.id)
+				bkmrq.removeClass("model")
+				bkmrq.addClass("item")
+				$(this.tags).each(function(){
+					bkmrq.find(".tags").append("<li>"+this.name+"</li>")
+				})
+
+				$("#items").append(bkmrq)
+			})
+			
+		})
+		.fail(function(xhr, status, err){
+			console.error("Unable to get bookmarks !")
+			displayError(xhr, status, err)
+		})
+}
+
 /* Removes a tag */
 function removeTag() {
-	let tid = $(".tag.item.selected").attr("num")
-	//Supprimer le tag 
-	$.ajax({
-		url:wsBase+"tags/"+tid+"?x-http-method=delete",
-		type:"DELETE",
-	})
-	.fail(function(xhr, status, err){
-		console.error("Unable to remove tag !")
-		displayError(xhr, status, err)
-	})
-	.done(listTags)
+	let tagToDelete = $('.tag.item.selected h2').text()
+	isUsed = 0
+	//TODO : Test if tag is used by a bookmark
+	$.get( wsBase+"bookmarks",function(data){
+		$(data).each(function(){
+				
+				$(this.tags).each(function(){
+					if(this.name==tagToDelete && isUsed!=1)
+					{
+						alert("Can't delete a tag used by a bookmark")
+						isUsed=1;
+						
+					}
+				})
+			})
+		})
+		.fail(function(xhr, status, err){
+			console.error("Unable to get bookmarks !")
+			displayError(xhr, status, err)
+		})
+	if(Boolean(isUsed))
+	{
+		let tid = $(".tag.item.selected").attr("num")
+		//Supprimer le tag 
+		$.ajax({
+			url:wsBase+"tags/"+tid+"?x-http-method=delete",
+			type:"DELETE",
+		})
+		.fail(function(xhr, status, err){
+			console.error("Unable to remove tag !")
+			displayError(xhr, status, err)
+		})
+		.done(listTags)
+	}
+
 } 
 
 
 function removeBookmark()
 {
 	let bid = $(".bookmark.item.selected").attr("num")
-
+	
 }
 
 
@@ -308,5 +333,5 @@ function selectObjectType(type) {
 				$("#add .bookmark").removeClass('selected')
 				break;
 		}
-	}	
+	}
 }
