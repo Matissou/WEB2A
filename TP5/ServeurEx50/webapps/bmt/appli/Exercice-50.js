@@ -112,20 +112,6 @@ function addBookmark()
 	}			
 }
 
-function removeBookmark()
-{
-	
-
-
-
-	
-}
-
-function clickBookmark()
-{
-	//TODO : de façon analogue à removeTag
-	//TODO : voir s'il est possible de factoriser
-}
 
 function modifyBookmark()
 {
@@ -134,25 +120,66 @@ function modifyBookmark()
 
 /* Handles the click on a tag */
 function clickTag() {
-		//ne rien faire si le tag est deja selectionné
-		if(!($(this).hasClass('selected')))
-		{
-			//On enleve la selection de l'ancien element selectionné
-			let oldSelected = $('#items .item.tag.selected')
-			oldSelected.removeClass('selected')
-			h2Hidden = oldSelected.find('h2').clone()
-			oldSelected.empty()
-			oldSelected.append(h2Hidden.show())
-			
-			$(this).addClass('selected')
-			$(this).find('h2').hide()
-			let oldName = $(this).find('h2').text()
-			$(this).append("<input type=\"text\" id=\"modifiedInputTag\" value=\""+oldName+"\">")
-			$(this).append("<input type=\"button\" id=\"modifyTag\" value=\"Modify name\">")
-			$('#modifyTag').click(function(){modifyTag();})
-			$(this).append("<input type=\"button\" id=\"removeTag\" value=\"Remove tag\">")
-			$('#removeTag').click(function(){removeTag();})
-		}
+	//ne rien faire si le tag est deja selectionné
+	if(!($(this).hasClass('selected')))
+	{
+		//On enleve la selection de l'ancien element selectionné
+		let oldSelected = $('#items .item.tag.selected')
+		oldSelected.removeClass('selected')
+		h2Hidden = oldSelected.find('h2').clone()
+		oldSelected.empty()
+		oldSelected.append(h2Hidden.show())
+	
+		$(this).addClass('selected')
+		$(this).find('h2').hide()
+		let oldName = $(this).find('h2').text()
+		$(this).append("<input type=\"text\" id=\"modifiedInputTag\" value=\""+oldName+"\">")
+		$(this).append("<input type=\"button\" id=\"modifyTag\" value=\"Modify name\">")
+		$('#modifyTag').click(function(){modifyTag();})
+		$(this).append("<input type=\"button\" id=\"removeTag\" value=\"Remove tag\">")
+		$('#removeTag').click(function(){removeTag();})
+	}
+}
+
+
+function clickBookmark()
+{
+
+	//ne rien faire si le tag est deja selectionné
+	if(!($(this).hasClass('selected')))
+	{
+		//On sauvegarde les 
+		let oldSelected = $('#items .item.bookmark.selected')
+		oldSelected.removeClass('selected')
+		//On les sauvegarde pour les ajouter ensuite
+		h2Hidden = oldSelected.find('h2').clone()
+		descHidden = oldSelected.find('.description').clone()
+		lienHidden = oldSelected.find('a').clone()
+		
+		// On les rajoute
+		oldSelected.empty()
+		oldSelected.append(h2Hidden.show())
+		oldSelected.append(descHidden.show())
+		oldSelected.append(lienHidden.show())
+		
+		//Puis on selectionne celui qui a trigger le bouton
+		$(this).addClass('selected')
+		let h2 =$(this).find('h2')
+		h2.hide()
+		let desc = $(this).find('.description')
+		desc.hide()
+		let lien = $(this).find('a')
+		lien.hide()
+
+		//User can change the input values
+		$(this).append("<input type=\"text\" id=\"modifiedTitleBM\" value=\""+h2.text()+"\">")
+		$(this).append("<input type=\"text\" id=\"modifiedDescBM\" value=\""+desc.text()+"\">")
+		$(this).append("<input type=\"text\" id=\"modifiedLinkBM\" value=\""+lien.text()+"\">")
+		$(this).append("<input type=\"button\" id=\"modifyBookmark\" value=\"Modify bookmark\">")
+		$('#modifyBookmark').click(function(){modifyBookmark();})
+		$(this).append("<input type=\"button\" id=\"removeBookmark\" value=\"Remove bookmark\">")
+		$('#removeBookmark').click(function(){removeBookmark();})
+	}	
 }
 
 
@@ -191,6 +218,15 @@ function removeTag() {
 	.done(listTags)
 } 
 
+
+function removeBookmark()
+{
+	let bid = $(".bookmark.item.selected").attr("num")
+
+}
+
+
+
 //Fonction that display errors on an alert
 function displayError(req, status, err){
 	alert("Sorry, an error occured : "+err)
@@ -219,7 +255,7 @@ $(function() {
 	
 	// Listen to clicks on the tag items
 	$(document).on('click','#items .item.tag',clickTag)
-	$(document).on('click', '#items .item.bookmark', clickBookmark)
+	$(document).on('click', '#items .bookmark', clickBookmark)
 
 })
 
