@@ -91,32 +91,6 @@ function addTag() {
 	}
 }
 
-function addBookmark()
-{
-	//get input text
-	let titre = $('#add .bookmark #titleBM').val()
-	let desc = $('#add .bookmark #descBM').val()
-	let lien = $('#add .bookmark #linkBM').val()
-	if(titre =="" || desc == "" || lien=="")
-	{ 
-		alert("Un des paramètres n'est pas correct")
-	}else{
-		let bookmark = JSON.stringify({title:titre, "description":desc, "link":lien, "tags":[]})
-		$.post(wsBase+'bookmarks', {json:bookmark})
-		.done(listBookmarks)
-		.fail(function(xhr, status, err){
-			console.error("Unable to create bookmark !")
-			displayError(xhr, status, err)
-		})
-
-	}			
-}
-
-
-function modifyBookmark()
-{
-
-}
 
 /* Handles the click on a tag */
 function clickTag() {
@@ -140,7 +114,6 @@ function clickTag() {
 		$('#removeTag').click(function(){removeTag();})
 	}
 }
-
 
 function clickBookmark()
 {
@@ -171,6 +144,8 @@ function clickBookmark()
 		let lien = $(this).find('a')
 		lien.hide()
 
+		//TODO : recupérer le style initial, ou alors le faire à la main (css())
+
 		//User can change the input values
 		$(this).append("<input type=\"text\" id=\"modifiedTitleBM\" value=\""+h2.text()+"\">")
 		$(this).append("<input type=\"text\" id=\"modifiedDescBM\" value=\""+desc.text()+"\">")
@@ -181,6 +156,49 @@ function clickBookmark()
 		$('#removeBookmark').click(function(){removeBookmark();})
 	}	
 }
+
+
+function modifyBookmark()
+{
+	let newTitle = $('#modifiedTitleBM').val()
+	let newDesc = $('#modifiedDescBM').val()
+	let newLink = $('#modifiedLinkBM').val()
+	
+	let bid = $('.bookmark.item.selected').attr("num") 
+	console.log(bid)
+	let newBM = JSON.stringify({title:newTitle, "description":newDesc, "link":newLink, "tags":[]})
+	$.ajax({
+		url: wsBase+"bookmarks/"+bid,
+		type:"PUT",
+		data: {json:newBM}
+	}).fail(function(xhr,status,err){
+		console.error("Unable to modify bookmark ! ")
+		displayError(xhr,status,err)
+	})
+	.done(listBookmarks)
+}
+
+function addBookmark()
+{
+	//get input text
+	let titre = $('#add .bookmark #titleBM').val()
+	let desc = $('#add .bookmark #descBM').val()
+	let lien = $('#add .bookmark #linkBM').val()
+	if(titre =="" || desc == "" || lien=="")
+	{ 
+		alert("Un des paramètres n'est pas correct")
+	}else{
+		let bookmark = JSON.stringify({title:titre, "description":desc, "link":lien, "tags":[]})
+		$.post(wsBase+'bookmarks', {json:bookmark})
+		.done(listBookmarks)
+		.fail(function(xhr, status, err){
+			console.error("Unable to create bookmark !")
+			displayError(xhr, status, err)
+		})
+
+	}			
+}
+
 
 
 /* Performs the modification of a tag */
