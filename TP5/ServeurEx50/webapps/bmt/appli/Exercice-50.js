@@ -137,7 +137,7 @@ function modifyBookmark()
 	
 	let bid = $('.bookmark.item.selected').attr("num") 
 	console.log(bid)
-	let newBM = JSON.stringify({title:newTitle, "description":newDesc, "link":newLink, "tags":[]})
+	let newBM = JSON.stringify({"id":bid, "title":newTitle, "description":newDesc, "link":newLink, "tags":[]})
 	$.ajax({
 		url: wsBase+"bookmarks/"+bid,
 		type:"PUT",
@@ -244,12 +244,12 @@ function removeTag() {
 			console.error("Unable to get bookmarks !")
 			displayError(xhr, status, err)
 		})
-	if(Boolean(isUsed))
+	if(! Boolean(isUsed))
 	{
 		let tid = $(".tag.item.selected").attr("num")
 		//Supprimer le tag 
 		$.ajax({
-			url:wsBase+"tags/"+tid+"?x-http-method=delete",
+			url:wsBase+"tags/"+tid,
 			type:"DELETE",
 		})
 		.fail(function(xhr, status, err){
@@ -265,9 +265,25 @@ function removeTag() {
 function removeBookmark()
 {
 	let bid = $(".bookmark.item.selected").attr("num")
-	//Supprimer le tag 
+	let newTitle = $('#modifiedTitleBM').val()
+	let newDesc = $('#modifiedDescBM').val()
+	let newLink = $('#modifiedLinkBM').val()
+	
+	let newBM = JSON.stringify({"id":bid, "title":newTitle, "description":newDesc, "link":newLink, "tags":[]})
+	//Supprimer les tags correspondants 
 	$.ajax({
-		url:wsBase+"bookmarks/"+bid+"?x-http-method=delete",
+		url:wsBase+"bookmarks/"+bid,
+		type:"PUT",
+		data: {json:newBM}
+   })
+   .fail(function(xhr, status, err){
+	   console.error("Unable to remove bookmark's tag !")
+	   displayError(xhr, status, err)
+   })
+   .done()
+
+	$.ajax({
+		url:wsBase+"bookmarks/"+bid,
 		type:"DELETE",
 	})
 	.fail(function(xhr, status, err){
