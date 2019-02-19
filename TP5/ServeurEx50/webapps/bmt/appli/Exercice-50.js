@@ -116,8 +116,12 @@ function clickBookmark()
 		desc.hide()
 		let lien = $(this).find('a')
 		lien.hide()
-		let tags = $(this).find('ul')
-		tags.hide()
+		let oldTags = []
+		let tags = $(this).find(".tags")
+		tags.children().each(function(){
+			oldTags.push($(this).text())
+		})
+
 		//TODO : recupérer le style initial, ou alors le faire à la main (css())
 
 		//User can change the input values
@@ -140,7 +144,11 @@ function clickBookmark()
 				$(".bookmark.item.selected").append("<h4>Tags </h4>")
 				//Ajout des tags dans les checkbox 
 				$(json).each(function () { 
-					$(".bookmark.item.selected").append("<input type=\"checkbox\" id="+this.id +" name="+this.name+"><label for="+this.id+">"+this.name+"</label>")
+					let check = ""
+					if (oldTags.includes(this.name)){
+						check = "checked"
+					}
+					$(".bookmark.item.selected").append("<input type=\"checkbox\" id="+this.id+" name="+this.name+" "+check+"><label for="+this.id+">"+this.name+"</label>")
 				 })
 			}
 		})
