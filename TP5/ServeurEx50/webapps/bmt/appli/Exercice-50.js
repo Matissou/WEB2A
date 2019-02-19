@@ -99,13 +99,15 @@ function clickBookmark()
 		h2Hidden = oldSelected.find('h2').clone()
 		descHidden = oldSelected.find('.description').clone()
 		lienHidden = oldSelected.find('a').clone()
-		
+		tagsHidden = oldSelected.find('ul').clone()
+
 		// On les rajoute
 		oldSelected.empty()
 		oldSelected.append(h2Hidden.show())
 		oldSelected.append(descHidden.show())
 		oldSelected.append(lienHidden.show())
-		
+		oldSelected.append(tagsHidden.show())
+
 		//Puis on selectionne celui qui a trigger le bouton
 		$(this).addClass('selected')
 		let h2 =$(this).find('h2')
@@ -114,7 +116,8 @@ function clickBookmark()
 		desc.hide()
 		let lien = $(this).find('a')
 		lien.hide()
-
+		let tags = $(this).find('ul')
+		tags.hide()
 		//TODO : recupérer le style initial, ou alors le faire à la main (css())
 
 		//User can change the input values
