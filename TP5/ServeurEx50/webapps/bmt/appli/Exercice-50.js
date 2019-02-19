@@ -11,9 +11,6 @@ function setContentHeight() {
 	$("#contents").css("height", "-webkit-fill-available")
 }
 
-
-
-
 /* Loads the list of all tags and displays them */
 function listTags() {
 	//TO FINISH ! 
@@ -52,6 +49,7 @@ function addTag() {
 	{
 		alert("La chaîne est vide")
 	}else{
+		//On parse le tag en JSON et on fait un post
 		let tag = JSON.stringify({name: inputVal });
 		$.post(wsBase+'tags', {json:tag})
 		.fail(function(xhr, status, err){
@@ -75,6 +73,8 @@ function clickTag() {
 		oldSelected.empty()
 		oldSelected.append(h2Hidden.show())
 	
+		//Voir les règles du TP. On veut afficher les items
+		// de l'ancien tag (maintenant non selectionné) et cacher ceux de celui selectionné
 		$(this).addClass('selected')
 		$(this).find('h2').hide()
 		let oldName = $(this).find('h2').text()
@@ -151,15 +151,17 @@ function clickBookmark()
 
 function modifyBookmark()
 {
+	//On récupère les inputs sur les champs
 	let tags = []
 	let newTitle = $('#modifiedTitleBM').val()
 	let newDesc = $('#modifiedDescBM').val()
 	let newLink = $('#modifiedLinkBM').val()
 	
+	//Puis les checkbox (les tags que l'on veux add/suppr)
 	let bid = $('.bookmark.item.selected').attr("num")	 
 	let checkBox = $('.bookmark.item.selected input[type="checkbox"]')
 	
-	
+	//Pour chaque bookmark checked, on l'ajoute au tableau
 	checkBox.each(function(){
 		console.log(this)
 		if($(this).attr('checked')){
@@ -168,7 +170,8 @@ function modifyBookmark()
 			tags.push({"id":id, "name":name})
 		}
 	});
-	console.log(tags)
+	
+	//Le nouvel objet JSON. On fait un put dessus pour procéder à une modification
 	let newBM = JSON.stringify({"id":bid, "title":newTitle, "description":newDesc, "link":newLink, "tags":tags})
 	$.ajax({
 		url: wsBase+"bookmarks/"+bid,
@@ -191,6 +194,7 @@ function addBookmark()
 	let lien = $('#add .bookmark #linkBM').val()
 	let checkBox = $('.bookmark.selected input[type="checkbox"]')
 	tags=[]
+	//De la même façon que modify, on utilise les checkbox cochées pour le post des tags et du bookmark
 	checkBox.each(function(){
 		console.log(this)
 		if($(this).attr('checked')){
@@ -336,6 +340,9 @@ function removeTag() {
 
 function removeBookmark()
 {
+	//On doit récupérer les valeurs du tag pour d'abord faire un put
+	// pour éviter la contrainte sql sur les tags (mettre à vide) puis un delete
+	// (erreur serveur donc on doit passer par xhttpmethod=delete)
 	let bid = $(".bookmark.item.selected").attr("num")
 	let newTitle = $('#modifiedTitleBM').val()
 	let newDesc = $('#modifiedDescBM').val()
@@ -406,6 +413,7 @@ $(function() {
 
 function populateDatabase()
 {
+	//Création de 3 tags basiques 
 	titleAr = ["Jquery Doc", "Capitalisme", "Facebook"]
 	descAr = ["Documentation de Jquery", "Site du capitalisme", "Un site remarquable"]
 	lienAr = ["jquery.org", "google.com", "facebook.com"]
