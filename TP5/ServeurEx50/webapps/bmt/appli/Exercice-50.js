@@ -136,7 +136,7 @@ function modifyBookmark()
 	let newLink = $('#modifiedLinkBM').val()
 	
 	let bid = $('.bookmark.item.selected').attr("num") 
-	console.log(bid)
+
 	let newBM = JSON.stringify({"id":bid, "title":newTitle, "description":newDesc, "link":newLink, "tags":[]})
 	$.ajax({
 		url: wsBase+"bookmarks/"+bid,
@@ -270,7 +270,7 @@ function removeBookmark()
 	let newLink = $('#modifiedLinkBM').val()
 	
 	let newBM = JSON.stringify({"id":bid, "title":newTitle, "description":newDesc, "link":newLink, "tags":[]})
-	//Supprimer les tags correspondants 
+	//Supprimer les tags correspondants pour eviter les erreur de database
 	$.ajax({
 		url:wsBase+"bookmarks/"+bid,
 		type:"PUT",
@@ -280,17 +280,18 @@ function removeBookmark()
 	   console.error("Unable to remove bookmark's tag !")
 	   displayError(xhr, status, err)
    })
-   .done()
-
-	$.ajax({
-		url:wsBase+"bookmarks/"+bid,
-		type:"DELETE",
-	})
-	.fail(function(xhr, status, err){
-		console.error("Unable to remove bookmark !")
-		displayError(xhr, status, err)
-	})
-	.done(listBookmarks)
+   .done(//Ensuite supprimer le bookmark
+		function(){
+			$.ajax({
+				url:wsBase+"bookmarks/"+bid+"?x-http-method=delete",
+			})
+			.fail(function(xhr, status, err){
+				console.error("Unable to remove bookmark !")
+				displayError(xhr, status, err)
+			})
+			.done(listBookmarks)
+		}
+	)
 }
 
 
