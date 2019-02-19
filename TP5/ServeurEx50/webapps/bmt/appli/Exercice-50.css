@@ -65,6 +65,14 @@ h1 {
 	margin:10px;
 }
 
+div#items > :nth-child(odd) {
+	background-color:#ccc;
+}
+
+div#items > :nth-child(even) {
+	background-color: white;
+}
+
 #add .bookmark, #add .tag, #add .bookmark {
 	display: none;
 	margin-top: 2ex;

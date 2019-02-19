@@ -307,7 +307,8 @@ $(function() {
 
 	// Adapt the height of <div id="contents"> to the navigator window
 	setContentHeight()
-
+		
+	
 	// Listen to the clicks on menu items
 	$('#menu li').on('click', function() {
 		var isTags = $(this).hasClass('tags')
@@ -324,12 +325,36 @@ $(function() {
 	// Listen to clicks on the tag items
 	$(document).on('click','#items .item.tag',clickTag)
 	$(document).on('click', '#items .bookmark', clickBookmark)
+	
+	populateDatabase()
 
 })
 
+function populateDatabase()
+{
+	titleAr = ["Jquery Doc", "Capitalisme", "Facebook"]
+	descAr = ["Documentation de Jquery", "Site du capitalisme", "Un site remarquable"]
+	lienAr = ["jquery.org", "google.com", "facebook.com"]
+	if($(".bookmark.item a").first().text()!="")
+	{
+		for(var i=0; i<titleAr.length; i++)
+		{
+			let bookmark = JSON.stringify({title:titleAr[i], "description":descAr[i], "link":lienAr[i], "tags":[]})
+			$.post(wsBase+'bookmarks', {json:bookmark})
+			.done(listBookmarks)
+		}
+	
+		titleAr = null
+		descAr = null
+		lienAr = null
+	}
+
+
+}
+
 /* Selects a new object type : either "bookmarks" or "tags" */
 function selectObjectType(type) {
-	
+
 	//Type couramment affiché (selected)
 	typeDefault = $("#menu li.selected");
 	//Si le type demandé est différent du type courant
@@ -359,4 +384,6 @@ function selectObjectType(type) {
 				break;
 		}
 	}
+
+
 }
