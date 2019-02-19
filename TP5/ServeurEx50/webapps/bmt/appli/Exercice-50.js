@@ -249,8 +249,7 @@ function removeTag() {
 		let tid = $(".tag.item.selected").attr("num")
 		//Supprimer le tag 
 		$.ajax({
-			url:wsBase+"tags/"+tid,
-			type:"DELETE",
+			url:wsBase+"tags/"+tid+"?x-http-method=delete"
 		})
 		.fail(function(xhr, status, err){
 			console.error("Unable to remove tag !")
