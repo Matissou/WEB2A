@@ -125,19 +125,51 @@ function clickBookmark()
 		$('#modifyBookmark').click(function(){modifyBookmark();})
 		$(this).append("<input type=\"button\" id=\"removeBookmark\" value=\"Remove bookmark\">")
 		$('#removeBookmark').click(function(){removeBookmark();})
+
+	
+	//First, get tags available
+	$.get( wsBase+"tags")
+		.done(function(json){
+			if(json ==""){
+				//If no tag found, nothing to do
+				return
+			}else{ //Create selector for tags
+				$(".bookmark.item.selected").append("<h4>Tags </h4>")
+				//Ajout des tags dans les checkbox 
+				$(json).each(function () { 
+					$(".bookmark.item.selected").append("<input type=\"checkbox\" id="+this.id +" name="+this.name+"><label for="+this.id+">"+this.name+"</label>")
+				 })
+			}
+		})
+		.fail(function(xhr, status, err){
+			console.error("Unable to get bookmarks !")
+			displayError(xhr, status, err)
+		})
 	}	
 }
 
 
 function modifyBookmark()
 {
+	let tags = []
 	let newTitle = $('#modifiedTitleBM').val()
 	let newDesc = $('#modifiedDescBM').val()
 	let newLink = $('#modifiedLinkBM').val()
 	
-	let bid = $('.bookmark.item.selected').attr("num") 
-
-	let newBM = JSON.stringify({"id":bid, "title":newTitle, "description":newDesc, "link":newLink, "tags":[]})
+	let bid = $('.bookmark.item.selected').attr("num")	 
+	let checkBox = $('.bookmark.item.selected input[type="checkbox"]')
+	
+	
+	checkBox.each(function(){
+		console.log(this)
+		if($(this).attr('checked')){
+			id = $(this).attr('id')
+			name = $(this).attr('name')
+			tags.push({"id":id, "name":name})
+		}
+	});
+	console.log(tags)
+	let newBM = JSON.stringify({"id":bid, "title":newTitle, "description":newDesc, "link":newLink, "tags":tags})
 	$.ajax({
 		url: wsBase+"bookmarks/"+bid,
 		type:"PUT",
@@ -147,6 +179,8 @@ function modifyBookmark()
 		displayError(xhr,status,err)
 	})
 	.done(listBookmarks)
+
+
 }
 
 function addBookmark()
@@ -155,11 +189,22 @@ function addBookmark()
 	let titre = $('#add .bookmark #titleBM').val()
 	let desc = $('#add .bookmark #descBM').val()
 	let lien = $('#add .bookmark #linkBM').val()
+	let checkBox = $('.bookmark.selected input[type="checkbox"]')
+	tags=[]
+	checkBox.each(function(){
+		console.log(this)
+		if($(this).attr('checked')){
+			id = $(this).attr('id')
+			name = $(this).attr('name')
+			tags.push({"id":id, "name":name})
+		}
+	});
+	
 	if(titre =="" || desc == "" || lien=="")
 	{ 
 		alert("Un des paramètres n'est pas correct")
 	}else{
-		let bookmark = JSON.stringify({title:titre, "description":desc, "link":lien, "tags":[]})
+		let bookmark = JSON.stringify({title:titre, "description":desc, "link":lien, "tags":tags})
 		$.post(wsBase+'bookmarks', {json:bookmark})
 		.done(listBookmarks)
 		.fail(function(xhr, status, err){
@@ -167,8 +212,36 @@ function addBookmark()
 			displayError(xhr, status, err)
 		})
 
-	}			
+	}		
+	
+
+		
+
 }
+
+function addCheckboxForBookmarks(){
+	//First, get tags available
+	$.get( wsBase+"tags")
+		.done(function(json){
+			if(json ==""){
+				//If no tag found, nothing to do
+				return
+			}else{ //Create selector for tags
+				buttonAddBkmrk = $("#addBookmark")
+				//Ajout des tags dans les checkbox 
+				$(json).each(function () { 
+					buttonAddBkmrk.before("<label for=\""+this.name+"\">"+this.name+"</label>")
+					buttonAddBkmrk.before("<input type=\"checkbox\" id="+this.id+" name="+this.name+">")
+				 })
+				buttonAddBkmrk.before('<br/>')
+			}
+		})
+		.fail(function(xhr, status, err){
+			console.error("Unable to get bookmarks !")
+			displayError(xhr, status, err)
+		})
+}
+
 
 /* Performs the modification of a tag */
 function modifyTag() {
@@ -326,6 +399,7 @@ $(function() {
 	$(document).on('click','#items .item.tag',clickTag)
 	$(document).on('click', '#items .bookmark', clickBookmark)
 	
+	addCheckboxForBookmarks()
 	populateDatabase()
 
 })
@@ -348,8 +422,6 @@ function populateDatabase()
 		descAr = null
 		lienAr = null
 	}
-
-
 }
 
 /* Selects a new object type : either "bookmarks" or "tags" */
